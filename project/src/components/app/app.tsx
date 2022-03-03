@@ -8,12 +8,14 @@ import AddReview from '../add-review/add-review';
 import Player from '../player-screen/player-screen';
 import NotFound from '../404-screen/404-screen';
 import PrivateRoute from '../private-route/private-route';
+import { FilmCards } from '../../types/film';
 type AppScreenProps = {
   title: string,
   relizeYear: number,
   genre: string,
+  films: FilmCards,
 }
-function App({title, relizeYear, genre}: AppScreenProps): JSX.Element {
+function App({title, relizeYear, genre,films}: AppScreenProps): JSX.Element {
   return(
     <BrowserRouter>
       <Routes>

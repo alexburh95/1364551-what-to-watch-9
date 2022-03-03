@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
-
+import { Films } from './mocks/film';
 
 const startSettings = {
   title : 'The Grand Budapest Hotel',
@@ -11,6 +11,10 @@ const startSettings = {
 };
 ReactDOM.render(
   <React.StrictMode>
-    <App title={startSettings.title} genre = {startSettings.genre} relizeYear={startSettings.realizeYear}/>
+    <App title={startSettings.title}
+      genre = {startSettings.genre} relizeYear={startSettings.realizeYear}
+      films={Films}
+    />
+
   </React.StrictMode>,
   document.getElementById('root'));
