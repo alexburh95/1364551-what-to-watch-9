@@ -1,27 +1,27 @@
 import { FilmCards } from '../types/film';
 
 
-export const Films: FilmCards = [
+export const films: FilmCards = [
   {
     id: 1,
     artist: ['John Travolta', 'Uma Turman'],
-    picture: '../img/avatar.jpg',
+    picture: '../img/aviator.jpg',
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     cover: '../img/avatar.jpg',
     genre: 'comedy',
     realizeYear: 1985,
-    title: 'Titanik',
+    title: 'Aviator',
 
   },
   {
     id: 2,
     artist: ['Bill Murray', 'Edward Norton'],
-    picture: '../img/avatar.jpg',
+    picture: '../img/bohemian-rhapsody.jpg',
     video: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
     cover: '../img/avatar.jpg',
     genre: 'comedy',
     realizeYear: 1985,
-    title: 'Titanik',
+    title: 'Bohemian Rhapsody',
 
   },
   {

@@ -1,15 +1,13 @@
 import React from 'react';
-import FilmCard from '../film-card/film-card';
+
+import FilmList from '../film-list/film-list';
 type MainScreenProps = {
   title: string,
   relizeYear: number,
   genre: string,
 }
 function MainScreen({title, relizeYear, genre}: MainScreenProps):JSX.Element {
-  const n = 20;
-  const arr = Array.from(Array(n).keys());
-  const newLocal = <FilmCard />;
-  const filmsList = arr.map(()=>  newLocal);
+
   return (
     <React.Fragment>
       <section className="film-card">
@@ -109,11 +107,9 @@ function MainScreen({title, relizeYear, genre}: MainScreenProps):JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            {filmsList}
 
+          <FilmList />
 
-          </div>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
