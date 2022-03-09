@@ -1,12 +1,13 @@
 import React from 'react';
-
+import { FilmCards } from '../../types/film';
 import FilmList from '../film-list/film-list';
 type MainScreenProps = {
   title: string,
   relizeYear: number,
   genre: string,
+  films: FilmCards,
 }
-function MainScreen({title, relizeYear, genre}: MainScreenProps):JSX.Element {
+function MainScreen({title, relizeYear, genre, films}: MainScreenProps):JSX.Element {
 
   return (
     <React.Fragment>
@@ -108,7 +109,7 @@ function MainScreen({title, relizeYear, genre}: MainScreenProps):JSX.Element {
           </ul>
 
 
-          <FilmList />
+          <FilmList films={films} />
 
 
           <div className="catalog__more">

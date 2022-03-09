@@ -1,4 +1,11 @@
-function MovieDetails(): JSX.Element {
+import { Film } from '../../types/film';
+type FilmProps = {
+  film: Film
+}
+function MovieDetails(props: FilmProps): JSX.Element {
+
+  const {film} = props;
+  const {title,picture, genre, realizeYear } = film;
   return (
     <section className="film-card film-card--full">
       <div className="film-card__hero">
@@ -20,7 +27,7 @@ function MovieDetails(): JSX.Element {
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
+                <img src={picture} alt="User avatar" width="63" height="63"/>
               </div>
             </li>
             <li className="user-block__item">
@@ -31,10 +38,10 @@ function MovieDetails(): JSX.Element {
 
         <div className="film-card__wrap">
           <div className="film-card__desc">
-            <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+            <h2 className="film-card__title">{title}</h2>
             <p className="film-card__meta">
-              <span className="film-card__genre">Drama</span>
-              <span className="film-card__year">2014</span>
+              <span className="film-card__genre">{genre}</span>
+              <span className="film-card__year">{realizeYear}</span>
             </p>
 
             <div className="film-card__buttons">

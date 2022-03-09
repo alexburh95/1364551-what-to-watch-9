@@ -1,10 +1,12 @@
 import FilmCard from '../film-card/film-card';
-import  {films}  from '../../mocks/film';
 
+import { FilmCards } from '../../types/film';
+type FilmProps ={
+  films: FilmCards
+}
+function FilmList(props: FilmProps): JSX.Element {
 
-function FilmList(): JSX.Element {
-
-
+  const {films} =props;
   return(
     <div className="catalog__films-list">
       {films.map((film)=>(<FilmCard key={film.id} film={film} /> ))}

@@ -5,23 +5,24 @@ import MyList from '../my-list-screen/my-list-screen';
 import {AppRoute, AuthorizationStatus} from '../../consts';
 import MovieDetails from '../movie-page-details-screen/movie-page-details-screen';
 import AddReview from '../add-review/add-review';
-import Player from '../player-screen/player-screen';
+
 import NotFound from '../404-screen/404-screen';
 import PrivateRoute from '../private-route/private-route';
-import { FilmCards } from '../../types/film';
+import { FilmCards, Film } from '../../types/film';
 type AppScreenProps = {
   title: string,
   relizeYear: number,
   genre: string,
   films: FilmCards,
+  film: Film
 }
-function App({title, relizeYear, genre,films}: AppScreenProps): JSX.Element {
+function App({title, relizeYear, genre,films, film}: AppScreenProps): JSX.Element {
   return(
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen title = {title} genre = {genre} relizeYear = {relizeYear} />}
+          element={<MainScreen films={films} title = {title} genre = {genre} relizeYear = {relizeYear} />}
         />
         <Route
           path = {AppRoute.SignIn}
@@ -34,23 +35,20 @@ function App({title, relizeYear, genre,films}: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.NoAuth}
             >
-              <MyList />
+              <MyList films ={films} />
             </PrivateRoute>
           }
 
         />
         <Route
           path = {AppRoute.Film}
-          element = {<MovieDetails />}
+          element = {<MovieDetails film={film} />}
         />
         <Route
           path = {AppRoute.AddReview }
           element = {<AddReview />}
         />
-        <Route
-          path = {AppRoute.Player}
-          element = {<Player />}
-        />
+
         <Route
           path="*"
           element={<NotFound />}
