@@ -13,7 +13,7 @@ ReactDOM.render(
   <React.StrictMode>
     <App title={startSettings.title}
       genre = {startSettings.genre} relizeYear={startSettings.realizeYear}
-      films={films} film={films[0]}
+      films={films}
     />
 
   </React.StrictMode>,

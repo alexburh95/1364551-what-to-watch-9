@@ -8,15 +8,15 @@ import AddReview from '../add-review/add-review';
 
 import NotFound from '../404-screen/404-screen';
 import PrivateRoute from '../private-route/private-route';
-import { FilmCards, Film } from '../../types/film';
+import { FilmCards} from '../../types/film';
 type AppScreenProps = {
   title: string,
   relizeYear: number,
   genre: string,
   films: FilmCards,
-  film: Film
+
 }
-function App({title, relizeYear, genre,films, film}: AppScreenProps): JSX.Element {
+function App({title, relizeYear, genre,films}: AppScreenProps): JSX.Element {
   return(
     <BrowserRouter>
       <Routes>
@@ -41,8 +41,8 @@ function App({title, relizeYear, genre,films, film}: AppScreenProps): JSX.Elemen
 
         />
         <Route
-          path = {AppRoute.Film}
-          element = {<MovieDetails film={film} />}
+          path = {AppRoute.Film(':id')}
+          element = {<MovieDetails  />}
         />
         <Route
           path = {AppRoute.AddReview }

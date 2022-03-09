@@ -1,10 +1,22 @@
-import { Film } from '../../types/film';
-type FilmProps = {
-  film: Film
-}
-function MovieDetails(props: FilmProps): JSX.Element {
 
-  const {film} = props;
+import { useParams } from 'react-router-dom';
+import { DECIMAL } from '../../consts';
+import NotFound from '../404-screen/404-screen';
+import { films } from '../../mocks/film';
+
+function MovieDetails(): JSX.Element {
+  const{id:qsId}= useParams();
+  if(typeof qsId=== 'undefined'){
+    return <NotFound />;
+  }
+  const id = Number.parseInt(qsId,DECIMAL);
+  if(!Number.isInteger(id)){
+    return <NotFound />;
+  }
+  const film = films.find((element)=>element.id === id);
+  if(typeof film ==='undefined'){
+    return <NotFound />;
+  }
   const {title,picture, genre, realizeYear } = film;
   return (
     <section className="film-card film-card--full">
