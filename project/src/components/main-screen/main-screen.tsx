@@ -1,6 +1,8 @@
 import React from 'react';
 import { FilmCards } from '../../types/film';
 import FilmList from '../film-list/film-list';
+import Logo from '../logo/logo';
+
 type MainScreenProps = {
   title: string,
   relizeYear: number,
@@ -19,13 +21,9 @@ function MainScreen({title, relizeYear, genre, films}: MainScreenProps):JSX.Elem
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link" href="/">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+
+          <Logo />
+
 
           <ul className="user-block">
             <li className="user-block__item">

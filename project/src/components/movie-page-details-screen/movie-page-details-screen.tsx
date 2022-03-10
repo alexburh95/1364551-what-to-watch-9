@@ -1,8 +1,9 @@
 
-import { useParams } from 'react-router-dom';
-import { DECIMAL } from '../../consts';
+import { Link, useParams } from 'react-router-dom';
+import { AppRoute, DECIMAL } from '../../consts';
 import NotFound from '../404-screen/404-screen';
 import { films } from '../../mocks/film';
+import Logo from '../logo/logo';
 
 function MovieDetails(): JSX.Element {
   const{id:qsId}= useParams();
@@ -28,13 +29,8 @@ function MovieDetails(): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a href="main.html" className="logo__link">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <Logo />
+
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -57,19 +53,21 @@ function MovieDetails(): JSX.Element {
             </p>
 
             <div className="film-card__buttons">
-              <button className="btn btn--play film-card__button" type="button">
+
+              <Link to={AppRoute.Player(id)} className="btn btn--play film-card__button" type="button">
                 <svg viewBox="0 0 19 19" width="19" height="19">
                   <use xlinkHref="#play-s"></use>
                 </svg>
                 <span>Play</span>
-              </button>
+
+              </Link>
               <button className="btn btn--list film-card__button" type="button">
                 <svg viewBox="0 0 19 20" width="19" height="20">
                   <use xlinkHref="#add"></use>
                 </svg>
                 <span>My list</span>
               </button>
-              <a href="add-review.html" className="btn film-card__button">Add review</a>
+              <Link to={AppRoute.AddReview(id)} className="btn film-card__button">Add review</Link>
             </div>
           </div>
         </div>
@@ -78,7 +76,7 @@ function MovieDetails(): JSX.Element {
       <div className="film-card__wrap film-card__translate-top">
         <div className="film-card__info">
           <div className="film-card__poster film-card__poster--big">
-            <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+            <img src={picture} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
           </div>
 
           <div className="film-card__desc">

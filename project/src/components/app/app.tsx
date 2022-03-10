@@ -9,6 +9,7 @@ import AddReview from '../add-review/add-review';
 import NotFound from '../404-screen/404-screen';
 import PrivateRoute from '../private-route/private-route';
 import { FilmCards} from '../../types/film';
+import Player from '../player-screen/player-screen';
 type AppScreenProps = {
   title: string,
   relizeYear: number,
@@ -41,11 +42,15 @@ function App({title, relizeYear, genre,films}: AppScreenProps): JSX.Element {
 
         />
         <Route
+          path={AppRoute.Player(':id')}
+          element={<Player />}
+        />
+        <Route
           path = {AppRoute.Film(':id')}
           element = {<MovieDetails  />}
         />
         <Route
-          path = {AppRoute.AddReview }
+          path = {AppRoute.AddReview(':id') }
           element = {<AddReview />}
         />
 

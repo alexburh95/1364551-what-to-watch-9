@@ -3,8 +3,8 @@ export const  AppRoute = {
   SignIn : '/login',
   MyList  : '/mylist',
   Film :  (id:number|':id')=>`/films/${id}`,
-  AddReview : '/films/:id/review',
-  Player : '/player/:id',
+  AddReview : (id:number|':id')=>`/films/${id}/review`,
+  Player : (id:number|':id')=> `/player/${id}`,
 } as const;
 
 export enum AuthorizationStatus {
