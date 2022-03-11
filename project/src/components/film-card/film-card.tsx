@@ -1,13 +1,30 @@
+import { Film } from '../../types/film';
+import { Link } from 'react-router-dom';
+import { AppRoute } from '../../consts';
 
-function FilmCard(): JSX.Element {
+type FilmProps = {
+  film: Film,
+  isActive: boolean,
+  onActivate:()=>void,
+  onDeactivate:()=>void,
+}
+function FilmCard(props: FilmProps): JSX.Element {
+
+
+  const {film,onDeactivate,onActivate,isActive} = props;
+  const {title,picture, id} = film;
+
+
   return (
 
-    <article className="small-film-card catalog__films-card">
+    <article onMouseEnter ={onActivate} onMouseLeave ={onDeactivate} className={`small-film-card catalog__films-card ${isActive}`}>
+
+
       <div className="small-film-card__image">
-        <img src="img/shutter-island.jpg" alt="Shutter Island" width="280" height="175" />
+        <img src={picture} alt={title} width="280" height="175" />
       </div>
       <h3 className="small-film-card__title">
-        <a className="small-film-card__link" href="film-page.html">Shutter Island</a>
+        <Link className="small-film-card__link"    to={AppRoute.Film(id)} >{title}</Link>
       </h3>
     </article>
   );
