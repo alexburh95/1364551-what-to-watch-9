@@ -13,7 +13,7 @@ function FilmCard(props: FilmProps): JSX.Element {
 
 
   const {film,onDeactivate,onActivate,isActive} = props;
-  const {title, id} = film;
+  const {title, id,video} = film;
 
 
   return (
@@ -22,7 +22,7 @@ function FilmCard(props: FilmProps): JSX.Element {
 
 
       <div className="small-film-card__image">
-        <VideoPlayer film = {film} />
+        <VideoPlayer isActive = {isActive} film = {film} src ={video} />
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link"    to={AppRoute.Film(id)} >{title}</Link>

@@ -4,20 +4,14 @@ import { AppRoute, DECIMAL } from '../../consts';
 import NotFound from '../404-screen/404-screen';
 import { films } from '../../mocks/film';
 import Logo from '../logo/logo';
+import { useFilm } from '../../hooks/use-film';
 
 function MovieDetails(): JSX.Element {
-  const{id:qsId}= useParams();
-  if(typeof qsId=== 'undefined'){
+  const film = useFilm();
+  if(typeof film === 'undefined'){
     return <NotFound />;
   }
-  const id = Number.parseInt(qsId,DECIMAL);
-  if(!Number.isInteger(id)){
-    return <NotFound />;
-  }
-  const film = films.find((element)=>element.id === id);
-  if(typeof film ==='undefined'){
-    return <NotFound />;
-  }
+
   const {title,picture, genre, realizeYear } = film;
   return (
     <section className="film-card film-card--full">
