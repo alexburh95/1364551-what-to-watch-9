@@ -1,6 +1,7 @@
 import { Film } from '../../types/film';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../../consts';
+import VideoPlayer from '../video-player/video-player';
 
 type FilmProps = {
   film: Film,
@@ -12,7 +13,7 @@ function FilmCard(props: FilmProps): JSX.Element {
 
 
   const {film,onDeactivate,onActivate,isActive} = props;
-  const {title,picture, id} = film;
+  const {title, id} = film;
 
 
   return (
@@ -21,7 +22,7 @@ function FilmCard(props: FilmProps): JSX.Element {
 
 
       <div className="small-film-card__image">
-        <img src={picture} alt={title} width="280" height="175" />
+        <VideoPlayer film = {film} />
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link"    to={AppRoute.Film(id)} >{title}</Link>
