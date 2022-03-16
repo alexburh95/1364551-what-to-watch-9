@@ -1,5 +1,6 @@
 import {useEffect, useRef, useState} from 'react';
 import { Film } from '../../types/film';
+import { notPlayVideo, playVideo } from './video-player-functions';
 type videoProps= {
   film: Film,
   src : string,
@@ -16,28 +17,18 @@ function VideoPlayer(props: videoProps): JSX.Element {
     const videoRefCurrent = videoRef.current;
     let timerId = 0;
     if(videoRefCurrent === null){
-      // eslint-disable-next-line no-console
-      console.log('Что-то не так!!!');
       return;
     }
     videoRefCurrent.onloadeddata = () => setIsLoading(false);
 
     if(playing){
-      // eslint-disable-next-line no-console
-      console.log('Запускаем видео');
       timerId = window.setTimeout(() =>{
-        if(videoRefCurrent !== null){
-          videoRefCurrent.muted = true;
-          videoRefCurrent.play();
-        }},1000);
+        playVideo(videoRefCurrent);},1000);
 
 
     }
     if(!playing){
-      // eslint-disable-next-line no-console
-      console.log('Отключаем видео');
-      videoRefCurrent.pause();
-      videoRefCurrent.src ='';
+      notPlayVideo(videoRefCurrent);
     }
 
     return () => {

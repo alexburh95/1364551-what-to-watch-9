@@ -1,8 +1,7 @@
 
-import { Link, useParams } from 'react-router-dom';
-import { AppRoute, DECIMAL } from '../../consts';
+import { Link} from 'react-router-dom';
+import { AppRoute} from '../../consts';
 import NotFound from '../404-screen/404-screen';
-import { films } from '../../mocks/film';
 import Logo from '../logo/logo';
 import { useFilm } from '../../hooks/use-film';
 
@@ -12,7 +11,7 @@ function MovieDetails(): JSX.Element {
     return <NotFound />;
   }
 
-  const {title,picture, genre, realizeYear } = film;
+  const {title,picture, genre, realizeYear, id } = film;
   return (
     <section className="film-card film-card--full">
       <div className="film-card__hero">
