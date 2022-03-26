@@ -36,7 +36,7 @@ const createGeneres = (array: FilmCards) => {
 createGeneres(films);
 
 
-const chooseGenre =(value:string, array:FilmCards) => {
+export const chooseGenre =(value:string, array:FilmCards) => {
 
 
   const checkGenre =(element:Film) => {
@@ -50,19 +50,16 @@ const chooseGenre =(value:string, array:FilmCards) => {
     }
   };
 
-  if(value === 'All generes'){
+  if(value === 'All genres'){
 
     return array;
   }
   else{
-    array.filter(checkGenre);
     const filteredArray = array.filter(checkGenre);
     return filteredArray;
   }
 };
 
-
-chooseGenre('All generes',films);
 
 ReactDOM.render(
   <React.StrictMode>

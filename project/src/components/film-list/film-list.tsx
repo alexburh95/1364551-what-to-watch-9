@@ -1,15 +1,19 @@
 import FilmCard from '../film-card/film-card';
 import {useState} from 'react';
 import { FilmCards } from '../../types/film';
+import { useAppSelector } from '../../hooks';
+import { chooseGenre } from '../..';
 type FilmProps ={
   films: FilmCards
 }
 function FilmList(props: FilmProps): JSX.Element {
   const [activeFilmId, setActiveFilmId] = useState(undefined as number| undefined);
   const {films} =props;
+  const currentGenre = useAppSelector((state)=> state.genre);
+  const currentFilms = chooseGenre(currentGenre,films);
   return(
     <div className="catalog__films-list">
-      {films.map((film)=>(
+      {currentFilms.map((film)=>(
         <FilmCard
           isActive={film.id=== activeFilmId}
           onActivate={()=>setActiveFilmId(film.id)}

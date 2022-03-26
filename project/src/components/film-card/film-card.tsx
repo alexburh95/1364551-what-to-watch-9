@@ -18,7 +18,7 @@ function FilmCard(props: FilmProps): JSX.Element {
 
   return (
 
-    <article onMouseEnter ={onActivate} onMouseLeave ={onDeactivate} className={`small-film-card catalog__films-card ${isActive}`}>
+    <article onMouseEnter ={onActivate} onMouseLeave ={onDeactivate} className={'small-film-card catalog__films-card'}>
 
 
       <div className="small-film-card__image">
