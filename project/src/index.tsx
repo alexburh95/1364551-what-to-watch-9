@@ -13,6 +13,23 @@ const startSettings = {
 
 };
 
+const createGeneres = (array: FilmCards) => {
+  const mySet = new Set();
+  array.forEach((element) => {
+    const {genre} = element;
+    mySet.add(genre);
+
+
+  });
+
+  const genresList = [...mySet];
+  return genresList;
+
+
+};
+
+createGeneres(films);
+
 
 const chooseGenre =(value:string, array:FilmCards) => {
 

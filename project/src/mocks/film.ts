@@ -8,7 +8,7 @@ export const films: FilmCards = [
     picture: '../img/aviator.jpg',
     video: '../video/green.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'comedy',
+    genre: 'Comedies',
     realizeYear: 1985,
     title: 'Aviator',
 
@@ -19,7 +19,7 @@ export const films: FilmCards = [
     picture: '../img/bohemian-rhapsody.jpg',
     video: '../video/star_trails.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'horor',
+    genre: 'Crime',
     realizeYear: 1985,
     title: 'Bohemian Rhapsody',
 
@@ -30,7 +30,7 @@ export const films: FilmCards = [
     picture: '../img/orlando.jpg',
     video: '../video/green.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'drama',
+    genre: 'Documentary',
     realizeYear: 1985,
     title: 'Orlando',
 
@@ -41,7 +41,7 @@ export const films: FilmCards = [
     picture: '../img/macbeth.jpg',
     video: '../video/star_trails.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'documentary',
+    genre: 'Dramas',
     realizeYear: 1985,
     title: 'Macbeth',
 
@@ -52,7 +52,7 @@ export const films: FilmCards = [
     picture: '../img/snatch.jpg',
     video: '../video/green.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'historik',
+    genre: 'Horror',
     realizeYear: 1985,
     title: 'Snatch',
 
@@ -63,7 +63,7 @@ export const films: FilmCards = [
     picture: '../img/revenant.jpg',
     video: '../video/star_trails.mp4',
     cover: '../img/revenant.jpg',
-    genre: 'comedy',
+    genre: 'Romance',
     realizeYear: 1985,
     title: 'Reverant',
 
@@ -74,7 +74,7 @@ export const films: FilmCards = [
     picture: '../img/seven-years-in-tibet.jpg',
     video: '../video/green.mp4',
     cover: '../img/seven-years-in-tibet.jpg',
-    genre: 'comedy',
+    genre: 'Thrillers',
     realizeYear: 1985,
     title: 'Seven yeaars of Thibet',
 
@@ -85,7 +85,7 @@ export const films: FilmCards = [
     picture: '../img/pulp-fiction.jpg',
     video: '../video/star_trails.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'comedy',
+    genre: 'Comedies',
     realizeYear: 1985,
     title: 'Pulp fiction',
 
