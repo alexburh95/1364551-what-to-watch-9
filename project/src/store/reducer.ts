@@ -2,9 +2,10 @@ import {createReducer} from '@reduxjs/toolkit';
 import { changeGenre } from './actions';
 
 import { films } from '../mocks/film';
+import { DEFAULT_GENRE } from '../consts';
 
 const initialState = {
-  genre: 'All genres',
+  genre: DEFAULT_GENRE,
   filmsList: films,
 };
 

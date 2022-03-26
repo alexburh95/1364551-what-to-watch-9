@@ -14,3 +14,6 @@ export enum AuthorizationStatus {
 }
 
 export const DECIMAL = 10;
+
+
+export const DEFAULT_GENRE = 'All genres';

@@ -2,7 +2,8 @@ import FilmCard from '../film-card/film-card';
 import {useState} from 'react';
 import { FilmCards } from '../../types/film';
 import { useAppSelector } from '../../hooks';
-import { chooseGenre } from '../..';
+import { chooseGenre } from '../generes-list/genres-list-functions';
+
 type FilmProps ={
   films: FilmCards
 }

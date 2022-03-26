@@ -2,28 +2,13 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { changeGenre } from '../../store/actions';
 import { FilmCards } from '../../types/film';
+import { createGeneres } from './genres-list-functions';
 type GenresProps ={
   films: FilmCards
 }
 
 function GeneresList(props: GenresProps): JSX.Element {
   const {films} = props;
-  const createGeneres = (array: FilmCards) => {
-    const mySet = new Set<string>();
-    mySet.add('All genres');
-    array.forEach((element) => {
-      const {genre} = element;
-      mySet.add(genre);
-
-
-    });
-
-    const genresList = [...mySet];
-    return genresList;
-
-
-  };
-
   const allGeneres = createGeneres(films);
   const dispatch = useAppDispatch();
   const currentGenre = useAppSelector((state)=> state.genre);
