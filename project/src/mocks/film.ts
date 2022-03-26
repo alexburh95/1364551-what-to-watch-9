@@ -19,7 +19,7 @@ export const films: FilmCards = [
     picture: '../img/bohemian-rhapsody.jpg',
     video: '../video/star_trails.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'comedy',
+    genre: 'horor',
     realizeYear: 1985,
     title: 'Bohemian Rhapsody',
 
@@ -30,7 +30,7 @@ export const films: FilmCards = [
     picture: '../img/orlando.jpg',
     video: '../video/green.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'comedy',
+    genre: 'drama',
     realizeYear: 1985,
     title: 'Orlando',
 
@@ -41,7 +41,7 @@ export const films: FilmCards = [
     picture: '../img/macbeth.jpg',
     video: '../video/star_trails.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'comedy',
+    genre: 'documentary',
     realizeYear: 1985,
     title: 'Macbeth',
 
@@ -52,7 +52,7 @@ export const films: FilmCards = [
     picture: '../img/snatch.jpg',
     video: '../video/green.mp4',
     cover: '../img/avatar.jpg',
-    genre: 'comedy',
+    genre: 'historik',
     realizeYear: 1985,
     title: 'Snatch',
 
