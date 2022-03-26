@@ -1,6 +1,7 @@
 import React from 'react';
 import { FilmCards } from '../../types/film';
 import FilmList from '../film-list/film-list';
+import GeneresList from '../generes-list/generes-list';
 import Logo from '../logo/logo';
 
 type MainScreenProps = {
@@ -104,7 +105,10 @@ function MainScreen({title, relizeYear, genre, films}: MainScreenProps):JSX.Elem
             <li className="catalog__genres-item">
               <a href="/" className="catalog__genres-link">Thrillers</a>
             </li>
+
+
           </ul>
+          <GeneresList films={films} />
 
 
           <FilmList films={films} />

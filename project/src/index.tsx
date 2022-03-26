@@ -22,7 +22,12 @@ const createGeneres = (array: FilmCards) => {
 
   });
 
+  // eslint-disable-next-line no-console
+  console.log(mySet);
   const genresList = [...mySet];
+
+  // eslint-disable-next-line no-console
+  console.log(genresList);
   return genresList;
 
 
