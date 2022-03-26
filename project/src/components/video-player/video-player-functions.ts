@@ -1,7 +1,7 @@
-export  const playVideo = (element: { muted: boolean; play: () => void; } | null)=>{
-  if(element !== null){
-    element.muted = true;
-    element.play();
+export  const playVideo = (video: { muted: boolean; play: () => void; } | null)=>{
+  if(video !== null){
+    video.muted = true;
+    video.play();
   }
 };
 export const notPlayVideo =(element: { pause: () => void; src: string; })=>{
