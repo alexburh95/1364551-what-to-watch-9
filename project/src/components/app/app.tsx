@@ -11,13 +11,8 @@ import PrivateRoute from '../private-route/private-route';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Player from '../player-screen/player-screen';
-type AppScreenProps = {
-  title: string,
-  relizeYear: number,
-  genre: string,
 
-}
-function App({title, relizeYear, genre}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const { isDataLoaded} = useAppSelector((state) => state);
   if (!isDataLoaded) {
     return (
@@ -30,7 +25,7 @@ function App({title, relizeYear, genre}: AppScreenProps): JSX.Element {
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen  title = {title} genre = {genre} relizeYear = {relizeYear} />}
+          element={<MainScreen  />}
         />
         <Route
           path = {AppRoute.SignIn}
