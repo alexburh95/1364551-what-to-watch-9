@@ -18,10 +18,10 @@ function Player(): JSX.Element {
     return <NotFound />;
   }
 
-  const {video, cover} =film;
+  const {videoLink, posterImage} =film;
   return (
     <div className="player">
-      <video src={video} className="player__video" poster={cover}></video>
+      <video src={videoLink} className="player__video" poster={posterImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 

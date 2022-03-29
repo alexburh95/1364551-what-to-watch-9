@@ -11,7 +11,7 @@ function MovieDetails(): JSX.Element {
     return <NotFound />;
   }
 
-  const {title,picture, genre, realizeYear, id } = film;
+  const {name,posterImage, genre, released, id } = film;
   return (
     <section className="film-card film-card--full">
       <div className="film-card__hero">
@@ -28,7 +28,7 @@ function MovieDetails(): JSX.Element {
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
-                <img src={picture} alt="User avatar" width="63" height="63"/>
+                <img src={posterImage} alt="User avatar" width="63" height="63"/>
               </div>
             </li>
             <li className="user-block__item">
@@ -39,10 +39,10 @@ function MovieDetails(): JSX.Element {
 
         <div className="film-card__wrap">
           <div className="film-card__desc">
-            <h2 className="film-card__title">{title}</h2>
+            <h2 className="film-card__title">{name}</h2>
             <p className="film-card__meta">
               <span className="film-card__genre">{genre}</span>
-              <span className="film-card__year">{realizeYear}</span>
+              <span className="film-card__year">{released}</span>
             </p>
 
             <div className="film-card__buttons">
@@ -69,7 +69,7 @@ function MovieDetails(): JSX.Element {
       <div className="film-card__wrap film-card__translate-top">
         <div className="film-card__info">
           <div className="film-card__poster film-card__poster--big">
-            <img src={picture} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
+            <img src={posterImage} alt="The Grand Budapest Hotel poster" width="218" height="327"/>
           </div>
 
           <div className="film-card__desc">
