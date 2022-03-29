@@ -1,8 +1,10 @@
 import { useParams } from 'react-router-dom';
+import { useAppSelector } from '.';
 import { DECIMAL } from '../consts';
-import { films } from '../mocks/film';
+
 
 export const useFilm =()=>{
+  const films = useAppSelector((state) => state.films);
   const{id:qsId}= useParams();
   if(typeof qsId=== 'undefined'){
     return undefined;

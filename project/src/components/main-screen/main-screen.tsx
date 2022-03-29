@@ -1,5 +1,5 @@
 import React from 'react';
-import { FilmCards } from '../../types/film';
+import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
 import GeneresList from '../generes-list/generes-list';
 import Logo from '../logo/logo';
@@ -8,9 +8,12 @@ type MainScreenProps = {
   title: string,
   relizeYear: number,
   genre: string,
-  films: FilmCards,
+
 }
-function MainScreen({title, relizeYear, genre, films}: MainScreenProps):JSX.Element {
+
+
+function MainScreen({title, relizeYear, genre}: MainScreenProps):JSX.Element {
+  const films = useAppSelector((state) => state.films);
 
   return (
     <React.Fragment>

@@ -8,22 +8,29 @@ import AddReview from '../add-review/add-review';
 
 import NotFound from '../404-screen/404-screen';
 import PrivateRoute from '../private-route/private-route';
-import { FilmCards} from '../../types/film';
+import { useAppSelector } from '../../hooks';
+import LoadingScreen from '../loading-screen/loading-screen';
 import Player from '../player-screen/player-screen';
 type AppScreenProps = {
   title: string,
   relizeYear: number,
   genre: string,
-  films: FilmCards,
 
 }
-function App({title, relizeYear, genre,films}: AppScreenProps): JSX.Element {
+function App({title, relizeYear, genre}: AppScreenProps): JSX.Element {
+  const { isDataLoaded} = useAppSelector((state) => state);
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return(
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainScreen films={films} title = {title} genre = {genre} relizeYear = {relizeYear} />}
+          element={<MainScreen  title = {title} genre = {genre} relizeYear = {relizeYear} />}
         />
         <Route
           path = {AppRoute.SignIn}
@@ -36,7 +43,7 @@ function App({title, relizeYear, genre,films}: AppScreenProps): JSX.Element {
             <PrivateRoute
               authorizationStatus={AuthorizationStatus.NoAuth}
             >
-              <MyList films ={films} />
+              <MyList  />
             </PrivateRoute>
           }
 
