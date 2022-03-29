@@ -1,13 +1,30 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '.';
-import { APIRoute } from '../consts';
+import { APIRoute, TIMEOUT_SHOW_ERROR } from '../consts';
+import { errorHandle } from '../services/error-handle';
 import { DataFilms } from '../types/film';
-import { loadFilms } from './actions';
+import { loadFilms, setError } from './actions';
+
+export const clearErrorAction = createAsyncThunk(
+  'clearError',
+  () => {
+    setTimeout(
+      () => store.dispatch(setError('')),
+      TIMEOUT_SHOW_ERROR,
+    );
+  },
+);
 
 export const fetchFilmsnAction = createAsyncThunk(
   'data/fetchFilms',
   async () => {
-    const {data} = await api.get<DataFilms>(APIRoute.Films);
-    store.dispatch(loadFilms(data));
+
+
+    try {
+      const {data} = await api.get<DataFilms>(APIRoute.Films);
+      store.dispatch(loadFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
   },
 );

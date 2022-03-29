@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeGenre, loadFilms } from './actions';
+import { changeGenre, loadFilms, setError } from './actions';
 
 import { films } from '../mocks/film';
 import { DEFAULT_GENRE } from '../consts';
@@ -7,6 +7,7 @@ import { DEFAULT_GENRE } from '../consts';
 const initialState = {
   genre: DEFAULT_GENRE,
   filmsList: films,
+  error: '',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -18,6 +19,10 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(loadFilms, (state, action) => {
       state.filmsList = action.payload;
+    })
+
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
     });
 
 });
