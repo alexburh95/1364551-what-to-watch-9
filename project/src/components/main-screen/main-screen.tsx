@@ -2,12 +2,15 @@ import React from 'react';
 import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
 import GeneresList from '../generes-list/generes-list';
+import { chooseGenre } from '../generes-list/genres-list-functions';
 import Logo from '../logo/logo';
 
 
 function MainScreen():JSX.Element {
+  const currentGenre = useAppSelector((state)=> state.genre);
   const films = useAppSelector((state) => state.films);
-  const film = films[Math.floor(Math.random() * films.length)];
+  const currentFilms = chooseGenre(currentGenre,films);
+  const film = currentFilms[Math.floor(Math.random() * currentFilms.length)];
   const {name, genre, backgroundImage, released, posterImage} = film;
   return (
     <React.Fragment>

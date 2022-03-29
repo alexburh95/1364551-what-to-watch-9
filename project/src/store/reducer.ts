@@ -3,12 +3,12 @@ import { changeGenre, loadFilms, setError } from './actions';
 
 
 import { DEFAULT_GENRE } from '../consts';
-import { DataFilms } from '../types/film';
+import { Films } from '../types/film';
 
 
 type InitalState = {
 genre: string,
-  films: DataFilms,
+  films: Films,
 error: string,
 isDataLoaded: boolean
 }

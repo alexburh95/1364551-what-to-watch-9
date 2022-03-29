@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AppRoute, DECIMAL } from '../../consts';
-import { films } from '../../mocks/film';
+import { useAppSelector } from '../../hooks';
 import NotFound from '../404-screen/404-screen';
 import Logo from '../logo/logo';
 
 function AddReview(): JSX.Element {
-
+  const films = useAppSelector((state) => state.films);
   const startRating = 0;
   const commentValue =' ';
 

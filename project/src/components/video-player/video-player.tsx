@@ -12,7 +12,7 @@ function VideoPlayer(props: videoProps): JSX.Element {
   const [isLoading, setIsLoading] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const {film,src, isActive: playing} = props;
-  const{videoLink, posterImage} = film;
+  const{videoLink, previewImage} = film;
   useEffect(() => {
     const videoRefCurrent = videoRef.current;
     let timerId = 0;
@@ -44,7 +44,7 @@ function VideoPlayer(props: videoProps): JSX.Element {
   return (
 
 
-    <video src={(playing)?(videoLink):('')}    ref = {videoRef} className="player__video" poster={posterImage}></video>
+    <video src={(playing)?(videoLink):('')}    ref = {videoRef} className="player__video" poster={previewImage}></video>
   );
 }
 
