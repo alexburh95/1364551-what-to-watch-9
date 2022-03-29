@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeGenre } from './actions';
+import { changeGenre, loadFilms } from './actions';
 
 import { films } from '../mocks/film';
 import { DEFAULT_GENRE } from '../consts';
@@ -15,7 +15,11 @@ const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
 
 
+    })
+    .addCase(loadFilms, (state, action) => {
+      state.filmsList = action.payload;
     });
+
 });
 export {reducer};
 
