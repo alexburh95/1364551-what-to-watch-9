@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { AppRoute, DECIMAL } from '../../consts';
-import { films } from '../../mocks/film';
+import { useAppSelector } from '../../hooks';
 import NotFound from '../404-screen/404-screen';
 import Logo from '../logo/logo';
 
 function AddReview(): JSX.Element {
-
+  const films = useAppSelector((state) => state.films);
   const startRating = 0;
   const commentValue =' ';
 
@@ -41,7 +41,7 @@ function AddReview(): JSX.Element {
   if(typeof film ==='undefined'){
     return <NotFound />;
   }
-  const {title,picture} = film;
+  const {name,posterImage} = film;
   return (
 
     <section className="film-card film-card--full">
@@ -59,7 +59,7 @@ function AddReview(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={AppRoute.Film(id)} className="breadcrumbs__link">{title}</Link>
+                <Link to={AppRoute.Film(id)} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link" href="/">Add review</a>
@@ -80,7 +80,7 @@ function AddReview(): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={picture} alt={title} width="218" height="327" />
+          <img src={posterImage} alt={name} width="218" height="327" />
         </div>
       </div>
 

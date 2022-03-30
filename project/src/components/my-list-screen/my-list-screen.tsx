@@ -1,9 +1,10 @@
-import { FilmCards } from '../../types/film';
+
+import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
-type MyListProps ={
-  films: FilmCards,
-}
-function MyList({films}: MyListProps): JSX.Element {
+
+function MyList(): JSX.Element {
+
+  const films = useAppSelector((state) => state.films);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

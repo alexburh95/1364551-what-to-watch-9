@@ -1,14 +1,16 @@
 import { useParams } from 'react-router-dom';
 import { DECIMAL } from '../../consts';
-import { films } from '../../mocks/film';
+import { useAppSelector } from '../../hooks';
 
 import NotFound from '../404-screen/404-screen';
 
 function Player(): JSX.Element {
+  const films = useAppSelector((state) => state.films);
   const{id:qsId}= useParams();
   if(typeof qsId=== 'undefined'){
     return <NotFound />;
   }
+
   const id = Number.parseInt(qsId,DECIMAL);
   if(!Number.isInteger(id)){
     return <NotFound />;
@@ -18,10 +20,10 @@ function Player(): JSX.Element {
     return <NotFound />;
   }
 
-  const {video, cover} =film;
+  const {videoLink, posterImage} =film;
   return (
     <div className="player">
-      <video src={video} className="player__video" poster={cover}></video>
+      <video src={videoLink} className="player__video" poster={posterImage}></video>
 
       <button type="button" className="player__exit">Exit</button>
 

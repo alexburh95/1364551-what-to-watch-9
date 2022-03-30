@@ -1,22 +1,22 @@
 import React from 'react';
-import { FilmCards } from '../../types/film';
+import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
 import GeneresList from '../generes-list/generes-list';
+import { chooseGenre } from '../generes-list/genres-list-functions';
 import Logo from '../logo/logo';
 
-type MainScreenProps = {
-  title: string,
-  relizeYear: number,
-  genre: string,
-  films: FilmCards,
-}
-function MainScreen({title, relizeYear, genre, films}: MainScreenProps):JSX.Element {
 
+function MainScreen():JSX.Element {
+  const currentGenre = useAppSelector((state)=> state.genre);
+  const films = useAppSelector((state) => state.films);
+  const currentFilms = chooseGenre(currentGenre,films);
+  const film = currentFilms[Math.floor(Math.random() * currentFilms.length)];
+  const {name, genre, backgroundImage, released, posterImage} = film;
   return (
     <React.Fragment>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -41,14 +41,14 @@ function MainScreen({title, relizeYear, genre, films}: MainScreenProps):JSX.Elem
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src= {posterImage}  alt={name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
                 <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{relizeYear}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
