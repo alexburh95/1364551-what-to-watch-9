@@ -1,9 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '.';
-import { APIRoute, TIMEOUT_SHOW_ERROR } from '../consts';
+import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../consts';
 import { errorHandle } from '../services/error-handle';
+import { dropToken, saveToken } from '../services/token';
+import { AuthData } from '../types/auth-data';
 import { Films } from '../types/film';
-import { loadFilms, setError } from './actions';
+import { UserData } from '../types/user-data';
+import { loadFilms, requireAuthorization, setError } from './actions';
 
 export const clearErrorAction = createAsyncThunk(
   'clearError',
@@ -26,5 +29,31 @@ export const fetchFilmsnAction = createAsyncThunk(
     } catch (error) {
       errorHandle(error);
     }
+  },
+);
+
+export const checkAuthAction = createAsyncThunk(
+  'user/checkAuth',
+  async () => {
+    await api.get(APIRoute.Login);
+    store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+  },
+);
+
+export const loginAction = createAsyncThunk(
+  'user/login',
+  async ({login: email, password}: AuthData) => {
+    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+    saveToken(token);
+    store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+  },
+);
+
+export const logoutAction = createAsyncThunk(
+  'user/logout',
+  async () => {
+    await api.delete(APIRoute.Logout);
+    dropToken();
+    store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
   },
 );
