@@ -1,12 +1,16 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
 import GeneresList from '../generes-list/generes-list';
 import { chooseGenre } from '../generes-list/genres-list-functions';
 import Logo from '../logo/logo';
+import NoAuthUser from '../no-auth-header/no-auth-header';
 
 
 function MainScreen():JSX.Element {
+
+
   const currentGenre = useAppSelector((state)=> state.genre);
   const films = useAppSelector((state) => state.films);
   const currentFilms = chooseGenre(currentGenre,films);
@@ -24,18 +28,7 @@ function MainScreen():JSX.Element {
         <header className="page-header film-card__head">
 
           <Logo />
-
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="/">Sign out</a>
-            </li>
-          </ul>
+          <NoAuthUser />
         </header>
 
         <div className="film-card__wrap">

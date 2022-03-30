@@ -35,25 +35,39 @@ export const fetchFilmsnAction = createAsyncThunk(
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
-    await api.get(APIRoute.Login);
-    store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    try {
+      await api.get(APIRoute.Login);
+      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    } catch(error) {
+      errorHandle(error);
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
   },
 );
 
 export const loginAction = createAsyncThunk(
   'user/login',
   async ({login: email, password}: AuthData) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(token);
-    store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    try {
+      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+      saveToken(token);
+      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
   },
 );
 
 export const logoutAction = createAsyncThunk(
   'user/logout',
   async () => {
-    await api.delete(APIRoute.Logout);
-    dropToken();
-    store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    try {
+      await api.delete(APIRoute.Logout);
+      dropToken();
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    } catch (error) {
+      errorHandle(error);
+    }
   },
 );
