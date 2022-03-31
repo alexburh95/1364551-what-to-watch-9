@@ -5,11 +5,11 @@ import App from './components/app/app';
 import {Provider} from 'react-redux';
 import { store } from './store';
 import ErrorMessage from './components/error-message/error-message';
-import { fetchFilmsnAction } from './store/api-actions';
+import { checkAuthAction, fetchFilmsnAction } from './store/api-actions';
 
 
 store.dispatch(fetchFilmsnAction());
-
+store.dispatch(checkAuthAction());
 
 ReactDOM.render(
   <React.StrictMode>
