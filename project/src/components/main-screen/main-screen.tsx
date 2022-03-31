@@ -4,8 +4,7 @@ import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
 import GeneresList from '../generes-list/generes-list';
 import { chooseGenre } from '../generes-list/genres-list-functions';
-import Logo from '../logo/logo';
-import NoAuthUser from '../no-auth-header/no-auth-header';
+import Header from '../header/header';
 
 
 function MainScreen():JSX.Element {
@@ -25,12 +24,7 @@ function MainScreen():JSX.Element {
 
         <h1 className="visually-hidden">WTW</h1>
 
-        <header className="page-header film-card__head">
-
-          <Logo />
-          <NoAuthUser />
-        </header>
-
+        <Header />
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
