@@ -1,10 +1,11 @@
 import { FormEvent, useRef } from 'react';
-import { AuthorizationStatus } from '../../consts';
+import { Navigate } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../consts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 import Logo from '../logo/logo';
-import MainScreen from '../main-screen/main-screen';
+
 
 function SignIn(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -14,7 +15,7 @@ function SignIn(): JSX.Element {
   const currentAuthStatus = useAppSelector((state)=> state.authorizationStatus);
   if(currentAuthStatus === AuthorizationStatus.Auth ){
     return(
-      <MainScreen />
+      <Navigate to={AppRoute.Main}/>
     );
   }
 

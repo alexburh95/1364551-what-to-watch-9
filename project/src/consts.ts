@@ -31,3 +31,15 @@ export enum HTTP_CODE {
 }
 
 export const TIMEOUT_SHOW_ERROR = 2000;
+
+export const TABS=[{
+  id: 1,
+  name : 'Overview',
+
+},{
+
+
+  id: 2,
+  name: 'Details'},{
+  id: 3, name:'Reviews',
+} ];

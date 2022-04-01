@@ -14,7 +14,8 @@ import Player from '../player-screen/player-screen';
 import { isCheckedAuth } from '../../film';
 
 function App(): JSX.Element {
-  const { isDataLoaded, authorizationStatus} = useAppSelector((state) => state);
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
     return (
       <LoadingScreen />
