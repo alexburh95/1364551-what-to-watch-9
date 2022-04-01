@@ -43,3 +43,9 @@ export const TABS=[{
   name: 'Details'},{
   id: 3, name:'Reviews',
 } ];
+
+
+export enum FilmsOnPage {
+  MaxPerStep = '8',
+  Initial = '8'
+}
