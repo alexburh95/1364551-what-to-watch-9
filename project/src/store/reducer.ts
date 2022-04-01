@@ -1,8 +1,8 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeGenre, loadFilms, requireAuthorization, setError } from './actions';
+import { addFilms, changeGenre, loadFilms, requireAuthorization, setError } from './actions';
 
 
-import { AuthorizationStatus, DEFAULT_GENRE } from '../consts';
+import { AuthorizationStatus, DEFAULT_GENRE, FilmsOnPage } from '../consts';
 import { Films } from '../types/film';
 
 
@@ -12,6 +12,7 @@ genre: string,
 error: string,
 isDataLoaded: boolean,
 authorizationStatus: AuthorizationStatus,
+maxFilms: number,
 }
 const initialState: InitalState = {
   genre: DEFAULT_GENRE,
@@ -19,6 +20,7 @@ const initialState: InitalState = {
   error: '',
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
+  maxFilms : +FilmsOnPage.Initial,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -39,6 +41,9 @@ const reducer = createReducer(initialState, (builder) => {
 
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(addFilms, (state) => {
+      state.maxFilms += +FilmsOnPage.MaxPerStep;
     });
 
 });
