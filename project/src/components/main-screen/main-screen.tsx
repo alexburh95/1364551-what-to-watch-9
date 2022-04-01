@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+
 import React from 'react';
 import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
@@ -70,7 +70,6 @@ function MainScreen():JSX.Element {
             currentFilms.slice(0, maxFilmsOnPage)
             : currentFilms}
           />
-
 
           {currentFilms.length > maxFilmsOnPage ? <ShowMore/> : null}
         </section>

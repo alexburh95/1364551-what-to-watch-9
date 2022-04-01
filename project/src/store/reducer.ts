@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { addFilms, changeGenre, loadFilms, requireAuthorization, setError } from './actions';
+import { addFilms, changeGenre, loadFilms, requireAuthorization, resetMaxFilms, setError } from './actions';
 
 
 import { AuthorizationStatus, DEFAULT_GENRE, FilmsOnPage } from '../consts';
@@ -44,6 +44,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(addFilms, (state) => {
       state.maxFilms += +FilmsOnPage.MaxPerStep;
+    })
+    .addCase(resetMaxFilms, (state) => {
+      state.maxFilms = +FilmsOnPage.Initial;
     });
 
 });
