@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TABS } from '../../consts';
-import { choosenTabRender } from '../choosen-tab/choosen-tab';
+import ChoosenTab from '../choosen-tab/choosen-tab';
 
 
 function Tabs(): JSX.Element {
@@ -36,7 +36,7 @@ function Tabs(): JSX.Element {
 
         </ul>
       </nav>
-      {choosenTabRender(currentTab)}
+      <ChoosenTab currentTab={currentTab}  />
     </>
   );
 }

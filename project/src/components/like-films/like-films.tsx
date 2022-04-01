@@ -9,8 +9,7 @@ type LikeFilm = {
 function LikeFilms(props:LikeFilm) : JSX.Element {
   const {film} = props;
   const {genre} = film;
-  const films = useAppSelector((state) => state.films);
-  const currentFilms = chooseGenre(genre,films);
+  const currentFilms = useAppSelector((state) => chooseGenre(genre,state.films));
   return(
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>

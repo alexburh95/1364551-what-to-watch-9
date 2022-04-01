@@ -20,7 +20,7 @@ function FilmDetails(): JSX.Element {
           <span className="film-card__details-value">
             {
               starring.map((el) => (
-                <Fragment key={`${el}`}>
+                <Fragment key={el}>
                   {el}
                   <br />
                 </Fragment>

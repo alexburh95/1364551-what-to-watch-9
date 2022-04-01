@@ -29,9 +29,9 @@ function FilmOverview(): JSX.Element {
             Starring:
             {
               starring.map((el) => (
-                <Fragment key={`${el}`}>
+                <Fragment key={el}>
                   {el}
-                 ,
+                  &nbsp;
                 </Fragment>
               ))
             }
