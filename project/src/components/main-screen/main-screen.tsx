@@ -13,6 +13,7 @@ function MainScreen():JSX.Element {
   const currentGenre = useAppSelector((state)=> state.genre);
   const films = useAppSelector((state) => state.films);
   const currentFilms = chooseGenre(currentGenre,films);
+  const maxFilmsOnPage = useAppSelector((state) => state.maxFilms);
   const film = currentFilms[Math.floor(Math.random() * currentFilms.length)];
   const {name, genre, backgroundImage, released, posterImage} = film;
   return (
@@ -64,7 +65,10 @@ function MainScreen():JSX.Element {
           <GeneresList films={films} />
 
 
-          <FilmList films={films} />
+          <FilmList films={currentFilms.length > maxFilmsOnPage ?
+            currentFilms.slice(0, maxFilmsOnPage)
+            : currentFilms}
+          />
 
 
           <div className="catalog__more">
