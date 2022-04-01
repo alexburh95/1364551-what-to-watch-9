@@ -5,6 +5,7 @@ import FilmList from '../film-list/film-list';
 import GeneresList from '../generes-list/generes-list';
 import { chooseGenre } from '../generes-list/genres-list-functions';
 import Header from '../header/header';
+import ShowMore from '../show-more/show-more';
 
 
 function MainScreen():JSX.Element {
@@ -71,9 +72,7 @@ function MainScreen():JSX.Element {
           />
 
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {currentFilms.length > maxFilmsOnPage ? <ShowMore/> : null}
         </section>
 
         <footer className="page-footer">
