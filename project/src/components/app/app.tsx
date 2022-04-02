@@ -5,7 +5,6 @@ import MyList from '../my-list-screen/my-list-screen';
 import {AppRoute} from '../../consts';
 import MovieDetails from '../movie-page-details-screen/movie-page-details-screen';
 import AddReview from '../add-review/add-review';
-
 import NotFound from '../404-screen/404-screen';
 import PrivateRoute from '../private-route/private-route';
 import { useAppSelector } from '../../hooks';

@@ -4,6 +4,7 @@ import { AppRoute, DECIMAL } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import NotFound from '../404-screen/404-screen';
 import Logo from '../logo/logo';
+import NoAuthUser from '../no-auth-header/no-auth-header';
 
 function AddReview(): JSX.Element {
   const films = useAppSelector((state) => state.films);
@@ -41,13 +42,19 @@ function AddReview(): JSX.Element {
   if(typeof film ==='undefined'){
     return <NotFound />;
   }
-  const {name,posterImage} = film;
+  const {name,posterImage, backgroundImage, backgroundColor} = film;
   return (
 
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full"  style={{
+
+      backgroundColor: `${backgroundColor}`,
+
+
+    }}
+    >
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -66,17 +73,7 @@ function AddReview(): JSX.Element {
               </li>
             </ul>
           </nav>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="/">Sign out</a>
-            </li>
-          </ul>
+          <NoAuthUser />
         </header>
 
         <div className="film-card__poster film-card__poster--small">
