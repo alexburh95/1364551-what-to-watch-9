@@ -8,6 +8,7 @@ import Logo from '../logo/logo';
 import NoAuthUser from '../no-auth-header/no-auth-header';
 
 function AddReview(): JSX.Element {
+  const isReviewSending = useAppSelector((state) => state.sendingReview);
   const film = useAppSelector((state) => state.currentFilm);
   const dispatch = useAppDispatch();
   const startRating = 0;
@@ -25,6 +26,8 @@ function AddReview(): JSX.Element {
   const textAreaChangeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (evt) => {
     const valueTextArea = evt.target.value;
     setComment(valueTextArea);
+
+
   };
 
 
@@ -40,7 +43,6 @@ function AddReview(): JSX.Element {
       }),
     );
   };
-
 
   const {name,posterImage, backgroundImage, backgroundColor, id} = film as Film;
   return (
@@ -118,9 +120,9 @@ function AddReview(): JSX.Element {
           </div>
 
           <div className="add-review__text">
-            <textarea onChange={textAreaChangeHandler} className="add-review__textarea" value={comment} name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea disabled={isReviewSending} onChange={textAreaChangeHandler} className="add-review__textarea" value={comment} name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post
+              <button disabled={comment.length < 50 || comment.length > 400 || !rating || isReviewSending}  className="add-review__btn" type="submit">Post
               </button>
             </div>
 
