@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 export const  AppRoute = {
   Main : '/',
   SignIn : '/login',
@@ -24,6 +26,7 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Promo = '/promo',
+  Reviews = '/comments'
 
 }
 export enum HTTP_CODE {
@@ -50,4 +53,9 @@ export const TABS=[{
 export enum FilmsOnPage {
   MaxPerStep = '8',
   Initial = '8'
+}
+
+
+export  function formatDate (value: string) {
+  return dayjs(value).format('MMMM DD, YYYY');
 }

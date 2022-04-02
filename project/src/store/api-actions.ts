@@ -5,8 +5,9 @@ import { errorHandle } from '../services/error-handle';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { Film, Films } from '../types/film';
+import { Reviews } from '../types/reviews';
 import { UserData } from '../types/user-data';
-import { loadCurrentFilm, loadFilms, loadMoreLikesFilms, loadPromoFilm, requireAuthorization, setError } from './actions';
+import { loadCurrentFilm, loadFilms, loadMoreLikesFilms, loadPromoFilm, loadReviews, requireAuthorization, setError } from './actions';
 
 export const clearErrorAction = createAsyncThunk(
   'clearError',
@@ -39,6 +40,20 @@ export const fetchCurrentFilmAction = createAsyncThunk(
     try {
       const {data} = await api.get<Film>((`${APIRoute.Films}/${filmId}`));
       store.dispatch(loadCurrentFilm(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+
+export const fetchReviewsAction = createAsyncThunk(
+  'data/fetchReviews',
+  async (filmId: string) => {
+
+    try {
+      const {data} = await api.get<Reviews>((`${APIRoute.Reviews}/${filmId}`));
+      store.dispatch(loadReviews(data));
     } catch (error) {
       errorHandle(error);
     }
