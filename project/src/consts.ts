@@ -1,12 +1,16 @@
-export const  AppRoute = {
-  Main : '/',
-  SignIn : '/login',
-  MyList  : '/mylist',
-  Film :  (id:number|':id')=>`/films/${id}`,
-  AddReview : (id:number|':id')=>`/films/${id}/review`,
-  Player : (id:number|':id')=> `/player/${id}`,
-} as const;
+import dayjs from 'dayjs';
 
+
+export enum AppRoute  {
+  Main = '/',
+  SignIn = '/login',
+  MyList = '/myList',
+  Film = '/films/:id',
+  ReviewForm = '/films/:id/review',
+  Player = '/player/:id',
+  Error = '*',
+
+}
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
@@ -23,6 +27,10 @@ export enum APIRoute {
  Films = '/films',
   Login = '/login',
   Logout = '/logout',
+  Promo = '/promo',
+  Reviews = '/comments'
+
+
 }
 export enum HTTP_CODE {
   BAD_REQUEST = 400,
@@ -48,4 +56,9 @@ export const TABS=[{
 export enum FilmsOnPage {
   MaxPerStep = '8',
   Initial = '8'
+}
+
+
+export  function formatDate (value: string) {
+  return dayjs(value).format('MMMM DD, YYYY');
 }

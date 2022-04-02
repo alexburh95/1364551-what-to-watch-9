@@ -1,9 +1,10 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { addFilms, changeGenre, loadFilms, requireAuthorization, resetMaxFilms, setError } from './actions';
+import { addFilms, changeGenre, loadCurrentFilm, loadFilms, loadMoreLikesFilms, loadPromoFilm, loadReviews, requireAuthorization, resetMaxFilms, sendReview, setError } from './actions';
 
 
 import { AuthorizationStatus, DEFAULT_GENRE, FilmsOnPage } from '../consts';
-import { Films } from '../types/film';
+import { Film, Films } from '../types/film';
+import { Reviews } from '../types/reviews';
 
 
 type InitalState = {
@@ -13,6 +14,11 @@ error: string,
 isDataLoaded: boolean,
 authorizationStatus: AuthorizationStatus,
 maxFilms: number,
+promoFilm: Film | object,
+currentFilm: Film | object,
+likeFilms: Films,
+reviews:Reviews,
+sendingReview: boolean,
 }
 const initialState: InitalState = {
   genre: DEFAULT_GENRE,
@@ -21,13 +27,19 @@ const initialState: InitalState = {
   isDataLoaded: false,
   authorizationStatus: AuthorizationStatus.Unknown,
   maxFilms : +FilmsOnPage.Initial,
+  promoFilm: {},
+  currentFilm: {},
+  likeFilms : [],
+  reviews: [],
+  sendingReview: false,
+
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
-
+      state.maxFilms = +FilmsOnPage.Initial;
 
     })
     .addCase(loadFilms, (state, action) => {
@@ -47,6 +59,26 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(resetMaxFilms, (state) => {
       state.maxFilms = +FilmsOnPage.Initial;
+    })
+
+    .addCase(loadPromoFilm, (state, action) => {
+      state.promoFilm = action.payload;
+    })
+
+    .addCase(loadCurrentFilm, (state, action) => {
+      state.currentFilm = action.payload;
+    })
+
+    .addCase(loadMoreLikesFilms, (state, action) => {
+      state.likeFilms  = action.payload;
+    })
+
+    .addCase(loadReviews, (state, action) => {
+      state.reviews  = action.payload;
+    })
+
+    .addCase(sendReview, (state, action) => {
+      state.sendingReview  = action.payload;
     });
 
 });

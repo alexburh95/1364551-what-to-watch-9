@@ -1,22 +1,34 @@
 
-import { Link} from 'react-router-dom';
-import { AppRoute} from '../../consts';
+import { Link, useParams} from 'react-router-dom';
+import { AppRoute, AuthorizationStatus} from '../../consts';
 import NotFound from '../404-screen/404-screen';
-import { useFilm } from '../../hooks/use-film';
 import Tabs from '../tabs/tabs';
 import LikeFilms from '../like-films/like-films';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import { useEffect } from 'react';
+import { fetchCurrentFilmAction, fetchMoreLikeFilmsAction, fetchReviewsAction } from '../../store/api-actions';
+import { store } from '../../store';
+import { useAppSelector } from '../../hooks';
+import { Film } from '../../types/film';
 
 function MovieDetails(): JSX.Element {
-  const film = useFilm();
+  const params = useParams();
+  useEffect(() => {
+    store.dispatch(fetchCurrentFilmAction(params.id as string));
+    store.dispatch(fetchMoreLikeFilmsAction(params.id as string));
+    store.dispatch(fetchReviewsAction(params.id as string));
+  }, [params.id]);
+  const film = useAppSelector((state) => state.currentFilm);
+  const films = useAppSelector((state) => state.likeFilms);
 
 
-  if(typeof film === 'undefined'){
+  const currentAuthStatus = useAppSelector((state)=> state.authorizationStatus);
+  if(film === Object){
     return <NotFound />;
   }
 
-  const {name,posterImage, genre, released, id, backgroundImage,backgroundColor } = film;
+  const {name,posterImage, genre, released, backgroundImage,backgroundColor, id } = film as Film;
   return (
     <>
       <section className="film-card film-card--full"  style={{
@@ -45,7 +57,7 @@ function MovieDetails(): JSX.Element {
 
               <div className="film-card__buttons">
 
-                <Link to={AppRoute.Player(id)} className="btn btn--play film-card__button" type="button">
+                <Link to={AppRoute.Player} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -58,7 +70,11 @@ function MovieDetails(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={AppRoute.AddReview(id)} className="btn film-card__button">Add review</Link>
+
+                {currentAuthStatus=== AuthorizationStatus.Auth ?
+                  <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                  : null}
+
               </div>
             </div>
           </div>
@@ -82,7 +98,7 @@ function MovieDetails(): JSX.Element {
         </div>
       </section>
       <div className="page-content">
-        <LikeFilms film={film} />
+        <LikeFilms films={films.filter((el) => el.name !== name)} />
 
         <Footer />
       </div>

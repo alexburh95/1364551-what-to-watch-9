@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { AppRoute, DECIMAL } from '../../consts';
-import { useAppSelector } from '../../hooks';
-import NotFound from '../404-screen/404-screen';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { sendReview } from '../../store/actions';
+import { fetchReviewAction } from '../../store/api-actions';
+import { Film } from '../../types/film';
 import Logo from '../logo/logo';
+import NoAuthUser from '../no-auth-header/no-auth-header';
 
 function AddReview(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const isReviewSending = useAppSelector((state) => state.sendingReview);
+  const film = useAppSelector((state) => state.currentFilm);
+  const dispatch = useAppDispatch();
   const startRating = 0;
   const commentValue =' ';
-
-  const[,setRaiting] = useState(startRating);
+  const param = useParams();
+  const[rating,setRaiting] = useState(startRating);
   const [comment, setComment] =useState(commentValue);
 
 
@@ -22,32 +26,37 @@ function AddReview(): JSX.Element {
   const textAreaChangeHandler: React.ChangeEventHandler<HTMLTextAreaElement> = (evt) => {
     const valueTextArea = evt.target.value;
     setComment(valueTextArea);
+
+
   };
 
 
   const formSubmitHandler:React.FormEventHandler<HTMLFormElement> = (evt) => {
+
     evt.preventDefault();
+    dispatch(sendReview(true));
+    dispatch(
+      fetchReviewAction({
+        rating: rating,
+        comment: comment,
+        filmId: param.id as string,
+      }),
+    );
   };
 
-  const{id:qsId}= useParams();
-  if(typeof qsId=== 'undefined'){
-    return <NotFound />;
-  }
-  const id = Number.parseInt(qsId,DECIMAL);
-  if(!Number.isInteger(id)){
-    return <NotFound />;
-  }
-  const film = films.find((element)=>element.id === id);
-  if(typeof film ==='undefined'){
-    return <NotFound />;
-  }
-  const {name,posterImage} = film;
+  const {name,posterImage, backgroundImage, backgroundColor, id} = film as Film;
   return (
 
-    <section className="film-card film-card--full">
+    <section className="film-card film-card--full"  style={{
+
+      backgroundColor: `${backgroundColor}`,
+
+
+    }}
+    >
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -59,24 +68,14 @@ function AddReview(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={AppRoute.Film(id)} className="breadcrumbs__link">{name}</Link>
+                <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link" href="/">Add review</a>
               </li>
             </ul>
           </nav>
-
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="/">Sign out</a>
-            </li>
-          </ul>
+          <NoAuthUser />
         </header>
 
         <div className="film-card__poster film-card__poster--small">
@@ -121,9 +120,10 @@ function AddReview(): JSX.Element {
           </div>
 
           <div className="add-review__text">
-            <textarea onChange={textAreaChangeHandler} className="add-review__textarea" value={comment} name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea disabled={isReviewSending} onChange={textAreaChangeHandler} className="add-review__textarea" value={comment} name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button disabled={comment.length < 50 || comment.length > 400 || !rating || isReviewSending}  className="add-review__btn" type="submit">Post
+              </button>
             </div>
 
           </div>

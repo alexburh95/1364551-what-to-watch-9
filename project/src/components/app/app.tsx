@@ -1,17 +1,18 @@
 import MainScreen from '../main-screen/main-screen';
 import SignIn from '../sign-in-screnn/sign-in-screen';
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import MyList from '../my-list-screen/my-list-screen';
 import {AppRoute} from '../../consts';
 import MovieDetails from '../movie-page-details-screen/movie-page-details-screen';
 import AddReview from '../add-review/add-review';
-
 import NotFound from '../404-screen/404-screen';
 import PrivateRoute from '../private-route/private-route';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Player from '../player-screen/player-screen';
 import { isCheckedAuth } from '../../film';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
@@ -23,7 +24,7 @@ function App(): JSX.Element {
   }
 
   return(
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route
           path={AppRoute.Main}
@@ -46,16 +47,22 @@ function App(): JSX.Element {
 
         />
         <Route
-          path={AppRoute.Player(':id')}
+          path={AppRoute.Player}
           element={<Player />}
         />
         <Route
-          path = {AppRoute.Film(':id')}
+          path = {AppRoute.Film}
           element = {<MovieDetails  />}
         />
         <Route
-          path = {AppRoute.AddReview(':id') }
-          element = {<AddReview />}
+          path = {AppRoute.ReviewForm  }
+          element={
+            <PrivateRoute
+              authorizationStatus={ authorizationStatus }
+            >
+              <AddReview />
+            </PrivateRoute>
+          }
         />
 
         <Route
@@ -63,7 +70,7 @@ function App(): JSX.Element {
           element={<NotFound />}
         />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
 

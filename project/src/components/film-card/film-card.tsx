@@ -1,6 +1,5 @@
 import { Film } from '../../types/film';
 import { Link } from 'react-router-dom';
-import { AppRoute } from '../../consts';
 import VideoPlayer from '../video-player/video-player';
 import { useAppDispatch } from '../../hooks';
 import { resetMaxFilms } from '../../store/actions';
@@ -15,7 +14,7 @@ function FilmCard(props: FilmProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const {film,onDeactivate,onActivate,isActive} = props;
-  const {name, id,videoLink} = film;
+  const {name,videoLink, id} = film;
 
 
   return (
@@ -31,7 +30,7 @@ function FilmCard(props: FilmProps): JSX.Element {
         dispatch(resetMaxFilms());
       }} className="small-film-card__title"
       >
-        <Link className="small-film-card__link"    to={AppRoute.Film(id)} >{name}</Link>
+        <Link className="small-film-card__link"    to={`/films/${id}`} >{name}</Link>
       </h3>
     </article>
   );
