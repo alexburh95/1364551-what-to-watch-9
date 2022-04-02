@@ -1,10 +1,12 @@
-/* eslint-disable no-console */
+
 import React from 'react';
 import { useAppSelector } from '../../hooks';
 import FilmList from '../film-list/film-list';
+import Footer from '../footer/footer';
 import GeneresList from '../generes-list/generes-list';
 import { chooseGenre } from '../generes-list/genres-list-functions';
 import Header from '../header/header';
+import ShowMore from '../show-more/show-more';
 
 
 function MainScreen():JSX.Element {
@@ -13,6 +15,7 @@ function MainScreen():JSX.Element {
   const currentGenre = useAppSelector((state)=> state.genre);
   const films = useAppSelector((state) => state.films);
   const currentFilms = chooseGenre(currentGenre,films);
+  const maxFilmsOnPage = useAppSelector((state) => state.maxFilms);
   const film = currentFilms[Math.floor(Math.random() * currentFilms.length)];
   const {name, genre, backgroundImage, released, posterImage} = film;
   return (
@@ -64,27 +67,15 @@ function MainScreen():JSX.Element {
           <GeneresList films={films} />
 
 
-          <FilmList films={films} />
+          <FilmList films={currentFilms.length > maxFilmsOnPage ?
+            currentFilms.slice(0, maxFilmsOnPage)
+            : currentFilms}
+          />
 
-
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {currentFilms.length > maxFilmsOnPage ? <ShowMore/> : null}
         </section>
 
-        <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light" href="/">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
-
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </React.Fragment>
   );

@@ -2,7 +2,7 @@ import MainScreen from '../main-screen/main-screen';
 import SignIn from '../sign-in-screnn/sign-in-screen';
 import {Route, BrowserRouter, Routes} from 'react-router-dom';
 import MyList from '../my-list-screen/my-list-screen';
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {AppRoute} from '../../consts';
 import MovieDetails from '../movie-page-details-screen/movie-page-details-screen';
 import AddReview from '../add-review/add-review';
 
@@ -38,7 +38,7 @@ function App(): JSX.Element {
 
           element={
             <PrivateRoute
-              authorizationStatus={AuthorizationStatus.NoAuth}
+              authorizationStatus={ authorizationStatus }
             >
               <MyList  />
             </PrivateRoute>

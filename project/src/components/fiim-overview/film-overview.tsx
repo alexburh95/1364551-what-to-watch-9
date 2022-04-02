@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 import { useFilm } from '../../hooks/use-film';
 import NotFound from '../404-screen/404-screen';
+import { getRatingLevel } from './film-overview-functions';
 
 function FilmOverview(): JSX.Element {
   const film = useFilm();
@@ -13,7 +14,7 @@ function FilmOverview(): JSX.Element {
       <div className="film-rating">
         <div className="film-rating__score">{rating}</div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">Very good</span>
+          <span className="film-rating__level">{getRatingLevel(rating)}</span>
           <span className="film-rating__count">{scoresCount} ratings</span>
         </p>
       </div>
@@ -29,9 +30,9 @@ function FilmOverview(): JSX.Element {
             Starring:
             {
               starring.map((el) => (
-                <Fragment key={`${el}`}>
+                <Fragment key={el}>
                   {el}
-                 ,
+                  &nbsp;
                 </Fragment>
               ))
             }
