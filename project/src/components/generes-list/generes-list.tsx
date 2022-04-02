@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { DEFAULT_GENRE } from '../../consts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre, resetMaxFilms } from '../../store/actions';
+import { changeGenre } from '../../store/actions';
 import { FilmCards } from '../../types/film';
 import { createGeneres } from './genres-list-functions';
 type GenresProps ={
@@ -20,7 +20,7 @@ function GeneresList(props: GenresProps): JSX.Element {
       <li
         onClick={() => {
           dispatch(changeGenre(DEFAULT_GENRE));
-          dispatch(resetMaxFilms());
+
         }}
 
 
@@ -37,7 +37,7 @@ function GeneresList(props: GenresProps): JSX.Element {
           key={genre}
           onClick={() => {
             dispatch(changeGenre(genre));
-            dispatch(resetMaxFilms());
+
           }}
           className={`catalog__genres-item  ${
             genre === currentGenre ? 'catalog__genres-item--active' : ''

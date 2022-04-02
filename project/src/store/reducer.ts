@@ -27,7 +27,7 @@ const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeGenre, (state, action) => {
       state.genre = action.payload;
-
+      state.maxFilms = +FilmsOnPage.Initial;
 
     })
     .addCase(loadFilms, (state, action) => {
