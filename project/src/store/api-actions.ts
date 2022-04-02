@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { api, store } from '.';
-import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../consts';
+import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../consts';
 import { errorHandle } from '../services/error-handle';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
@@ -42,6 +42,7 @@ export const fetchCurrentFilmAction = createAsyncThunk(
       store.dispatch(loadCurrentFilm(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(redirectToRoute(AppRoute.Error));
     }
   },
 );
@@ -69,6 +70,7 @@ export const fetchMoreLikeFilmsAction = createAsyncThunk(
       store.dispatch(loadMoreLikesFilms(data));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(redirectToRoute(AppRoute.Error));
     }
   },
 );
@@ -96,6 +98,7 @@ export const checkAuthAction = createAsyncThunk(
     } catch(error) {
       errorHandle(error);
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+      store.dispatch(redirectToRoute(AppRoute.Main));
     }
   },
 );
