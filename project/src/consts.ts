@@ -28,6 +28,7 @@ export enum APIRoute {
   Promo = '/promo',
   Reviews = '/comments'
 
+
 }
 export enum HTTP_CODE {
   BAD_REQUEST = 400,

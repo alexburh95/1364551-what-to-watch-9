@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { addFilms, changeGenre, loadCurrentFilm, loadFilms, loadMoreLikesFilms, loadPromoFilm, loadReviews, requireAuthorization, resetMaxFilms, setError } from './actions';
+import { addFilms, changeGenre, loadCurrentFilm, loadFilms, loadMoreLikesFilms, loadPromoFilm, loadReviews, requireAuthorization, resetMaxFilms, sendReview, setError } from './actions';
 
 
 import { AuthorizationStatus, DEFAULT_GENRE, FilmsOnPage } from '../consts';
@@ -18,6 +18,7 @@ promoFilm: Film | object,
 currentFilm: Film | object,
 likeFilms: Films,
 reviews:Reviews,
+sendingReview: boolean,
 }
 const initialState: InitalState = {
   genre: DEFAULT_GENRE,
@@ -30,6 +31,7 @@ const initialState: InitalState = {
   currentFilm: {},
   likeFilms : [],
   reviews: [],
+  sendingReview: false,
 
 };
 
@@ -73,6 +75,10 @@ const reducer = createReducer(initialState, (builder) => {
 
     .addCase(loadReviews, (state, action) => {
       state.reviews  = action.payload;
+    })
+
+    .addCase(sendReview, (state, action) => {
+      state.sendingReview  = action.payload;
     });
 
 });

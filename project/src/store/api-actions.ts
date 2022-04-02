@@ -5,9 +5,9 @@ import { errorHandle } from '../services/error-handle';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { Film, Films } from '../types/film';
-import { Reviews } from '../types/reviews';
+import { Reviews, UserReview } from '../types/reviews';
 import { UserData } from '../types/user-data';
-import { loadCurrentFilm, loadFilms, loadMoreLikesFilms, loadPromoFilm, loadReviews, requireAuthorization, setError } from './actions';
+import { loadCurrentFilm, loadFilms, loadMoreLikesFilms, loadPromoFilm, loadReviews, requireAuthorization, sendReview, setError } from './actions';
 
 export const clearErrorAction = createAsyncThunk(
   'clearError',
@@ -113,6 +113,20 @@ export const loginAction = createAsyncThunk(
     }
   },
 );
+
+export const fetchReviewAction = createAsyncThunk(
+  'data/fetchReview',
+  async ({rating, comment, filmId}: UserReview) => {
+    try {
+      await api.post<UserReview>(`${APIRoute.Reviews}/${filmId}`, {rating, comment});
+      store.dispatch(sendReview(false));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
+  },
+);
+
 
 export const logoutAction = createAsyncThunk(
   'user/logout',

@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
-import { AppRoute, DECIMAL } from '../../consts';
-import { useAppSelector } from '../../hooks';
-import NotFound from '../404-screen/404-screen';
+import { useParams, Link, Navigate } from 'react-router-dom';
+import { AppRoute } from '../../consts';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { sendReview } from '../../store/actions';
+import { fetchReviewAction } from '../../store/api-actions';
+import { Film } from '../../types/film';
 import Logo from '../logo/logo';
 import NoAuthUser from '../no-auth-header/no-auth-header';
 
 function AddReview(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const film = useAppSelector((state) => state.currentFilm);
+  const dispatch = useAppDispatch();
   const startRating = 0;
   const commentValue =' ';
-
-  const[,setRaiting] = useState(startRating);
+  const param = useParams();
+  const[rating,setRaiting] = useState(startRating);
   const [comment, setComment] =useState(commentValue);
 
 
@@ -27,22 +30,21 @@ function AddReview(): JSX.Element {
 
 
   const formSubmitHandler:React.FormEventHandler<HTMLFormElement> = (evt) => {
+
     evt.preventDefault();
+    dispatch(sendReview(true));
+    dispatch(
+      fetchReviewAction({
+        rating: rating,
+        comment: comment,
+        filmId: param.id as string,
+      }),
+    );
+    <Navigate to={AppRoute.Film(id)}/>;
   };
 
-  const{id:qsId}= useParams();
-  if(typeof qsId=== 'undefined'){
-    return <NotFound />;
-  }
-  const id = Number.parseInt(qsId,DECIMAL);
-  if(!Number.isInteger(id)){
-    return <NotFound />;
-  }
-  const film = films.find((element)=>element.id === id);
-  if(typeof film ==='undefined'){
-    return <NotFound />;
-  }
-  const {name,posterImage, backgroundImage, backgroundColor} = film;
+
+  const {name,posterImage, backgroundImage, backgroundColor, id} = film as Film;
   return (
 
     <section className="film-card film-card--full"  style={{
@@ -120,7 +122,8 @@ function AddReview(): JSX.Element {
           <div className="add-review__text">
             <textarea onChange={textAreaChangeHandler} className="add-review__textarea" value={comment} name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
-              <button className="add-review__btn" type="submit">Post</button>
+              <button className="add-review__btn" type="submit">Post
+              </button>
             </div>
 
           </div>

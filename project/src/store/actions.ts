@@ -14,3 +14,4 @@ export const loadPromoFilm = createAction<Film>('data/loadPromoFilm');
 export const loadCurrentFilm = createAction<Film>('data/loadCurrentFilm');
 export const loadMoreLikesFilms = createAction<Films>('data/loadMoreLikesFilms');
 export const loadReviews = createAction<Reviews>('data/loadComments');
+export const sendReview = createAction<boolean>('data/sendRewiew');
