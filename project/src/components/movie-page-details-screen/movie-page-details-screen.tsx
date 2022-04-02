@@ -1,6 +1,6 @@
 
 import { Link, useParams} from 'react-router-dom';
-import { AppRoute} from '../../consts';
+import { AppRoute, AuthorizationStatus} from '../../consts';
 import NotFound from '../404-screen/404-screen';
 import Tabs from '../tabs/tabs';
 import LikeFilms from '../like-films/like-films';
@@ -22,8 +22,8 @@ function MovieDetails(): JSX.Element {
   const film = useAppSelector((state) => state.currentFilm);
   const films = useAppSelector((state) => state.likeFilms);
 
-  // eslint-disable-next-line no-console
-  console.log(film === Object);
+
+  const currentAuthStatus = useAppSelector((state)=> state.authorizationStatus);
   if(film === Object){
     return <NotFound />;
   }
@@ -70,7 +70,11 @@ function MovieDetails(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={AppRoute.AddReview(id)} className="btn film-card__button">Add review</Link>
+
+                {currentAuthStatus=== AuthorizationStatus.Auth ?
+                  <Link to={AppRoute.AddReview(id)} className="btn film-card__button">Add review</Link>
+                  : null}
+
               </div>
             </div>
           </div>
