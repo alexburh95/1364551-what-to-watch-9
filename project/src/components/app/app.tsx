@@ -55,7 +55,13 @@ function App(): JSX.Element {
         />
         <Route
           path = {AppRoute.AddReview(':id') }
-          element = {<AddReview />}
+          element={
+            <PrivateRoute
+              authorizationStatus={ authorizationStatus }
+            >
+              <AddReview />
+            </PrivateRoute>
+          }
         />
 
         <Route
