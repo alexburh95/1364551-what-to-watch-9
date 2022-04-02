@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
-import { AppRoute } from '../../consts';
+import { useParams, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { sendReview } from '../../store/actions';
 import { fetchReviewAction } from '../../store/api-actions';
@@ -40,7 +39,6 @@ function AddReview(): JSX.Element {
         filmId: param.id as string,
       }),
     );
-    <Navigate to={AppRoute.Film(id)}/>;
   };
 
 
@@ -68,7 +66,7 @@ function AddReview(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={AppRoute.Film(id)} className="breadcrumbs__link">{name}</Link>
+                <Link to={`/films/${id}`} className="breadcrumbs__link">{name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link" href="/">Add review</a>

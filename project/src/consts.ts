@@ -1,14 +1,16 @@
 import dayjs from 'dayjs';
 
-export const  AppRoute = {
-  Main : '/',
-  SignIn : '/login',
-  MyList  : '/mylist',
-  Film :  (id:number|':id')=>`/films/${id}`,
-  AddReview : (id:number|':id')=>`/films/${id}/review`,
-  Player : (id:number|':id')=> `/player/${id}`,
-} as const;
 
+export enum AppRoute  {
+  Main = '/',
+  SignIn = '/login',
+  MyList = '/myList',
+  Film = '/films/:id',
+  ReviewForm = '/films/:id/review',
+  Player = '/player/:id',
+  Error = '*',
+
+}
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',

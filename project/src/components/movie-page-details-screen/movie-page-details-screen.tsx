@@ -28,7 +28,7 @@ function MovieDetails(): JSX.Element {
     return <NotFound />;
   }
 
-  const {name,posterImage, genre, released, id, backgroundImage,backgroundColor } = film as Film;
+  const {name,posterImage, genre, released, backgroundImage,backgroundColor, id } = film as Film;
   return (
     <>
       <section className="film-card film-card--full"  style={{
@@ -57,7 +57,7 @@ function MovieDetails(): JSX.Element {
 
               <div className="film-card__buttons">
 
-                <Link to={AppRoute.Player(id)} className="btn btn--play film-card__button" type="button">
+                <Link to={AppRoute.Player} className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -72,7 +72,7 @@ function MovieDetails(): JSX.Element {
                 </button>
 
                 {currentAuthStatus=== AuthorizationStatus.Auth ?
-                  <Link to={AppRoute.AddReview(id)} className="btn film-card__button">Add review</Link>
+                  <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
                   : null}
 
               </div>

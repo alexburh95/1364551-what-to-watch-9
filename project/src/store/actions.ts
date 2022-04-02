@@ -1,5 +1,5 @@
 import {createAction} from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../consts';
+import { AuthorizationStatus, AppRoute } from '../consts';
 import { Film, Films } from '../types/film';
 import { Reviews } from '../types/reviews';
 
@@ -15,3 +15,4 @@ export const loadCurrentFilm = createAction<Film>('data/loadCurrentFilm');
 export const loadMoreLikesFilms = createAction<Films>('data/loadMoreLikesFilms');
 export const loadReviews = createAction<Reviews>('data/loadComments');
 export const sendReview = createAction<boolean>('data/sendRewiew');
+export const redirectToRoute = createAction<AppRoute | string>('film/redirectToRoute');
