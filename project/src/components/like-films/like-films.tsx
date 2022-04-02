@@ -1,20 +1,17 @@
-import { useAppSelector } from '../../hooks';
-import { Film } from '../../types/film';
+import { Films } from '../../types/film';
 import FilmList from '../film-list/film-list';
-import { chooseGenre } from '../generes-list/genres-list-functions';
 
 type LikeFilm = {
-  film: Film
+  films: Films
 }
 function LikeFilms(props:LikeFilm) : JSX.Element {
-  const {film} = props;
-  const {genre} = film;
-  const currentFilms = useAppSelector((state) => chooseGenre(genre,state.films));
+  const {films} = props;
+
   return(
     <section className="catalog catalog--like-this">
       <h2 className="catalog__title">More like this</h2>
 
-      <FilmList films={currentFilms} />
+      <FilmList films={films} />
     </section>
   );
 

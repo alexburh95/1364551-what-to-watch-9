@@ -7,7 +7,7 @@ import LikeFilms from '../like-films/like-films';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import { useEffect } from 'react';
-import { fetchCurrentFilmAction } from '../../store/api-actions';
+import { fetchCurrentFilmAction, fetchMoreLikeFilmsAction } from '../../store/api-actions';
 import { store } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/film';
@@ -16,9 +16,11 @@ function MovieDetails(): JSX.Element {
   const params = useParams();
   useEffect(() => {
     store.dispatch(fetchCurrentFilmAction(params.id as string));
+    store.dispatch(fetchMoreLikeFilmsAction(params.id as string));
 
   }, [params.id]);
   const film = useAppSelector((state) => state.currentFilm);
+  const films = useAppSelector((state) => state.likeFilms);
   if(typeof film === 'undefined'){
     return <NotFound />;
   }
@@ -89,7 +91,7 @@ function MovieDetails(): JSX.Element {
         </div>
       </section>
       <div className="page-content">
-        <LikeFilms film={film as Film} />
+        <LikeFilms films={films.filter((el) => el.name !== name)} />
 
         <Footer />
       </div>
