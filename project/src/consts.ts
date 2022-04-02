@@ -23,6 +23,7 @@ export enum APIRoute {
  Films = '/films',
   Login = '/login',
   Logout = '/logout',
+  Promo = '/promo',
 }
 export enum HTTP_CODE {
   BAD_REQUEST = 400,

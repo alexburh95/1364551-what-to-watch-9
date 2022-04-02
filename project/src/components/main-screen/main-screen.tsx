@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useAppSelector } from '../../hooks';
+import { Film } from '../../types/film';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 import GeneresList from '../generes-list/generes-list';
@@ -14,10 +15,10 @@ function MainScreen():JSX.Element {
 
   const currentGenre = useAppSelector((state)=> state.genre);
   const films = useAppSelector((state) => state.films);
+  const promoFilm = useAppSelector((state) => state.promoFilm);
   const currentFilms = chooseGenre(currentGenre,films);
   const maxFilmsOnPage = useAppSelector((state) => state.maxFilms);
-  const film = currentFilms[Math.floor(Math.random() * currentFilms.length)];
-  const {name, genre, backgroundImage, released, posterImage} = film;
+  const {name, genre, backgroundImage, released, posterImage} = promoFilm as Film;
   return (
     <React.Fragment>
       <section className="film-card">

@@ -4,9 +4,9 @@ import { APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../consts';
 import { errorHandle } from '../services/error-handle';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
-import { Films } from '../types/film';
+import { Film, Films } from '../types/film';
 import { UserData } from '../types/user-data';
-import { loadFilms, requireAuthorization, setError } from './actions';
+import { loadFilms, loadPromoFilm, requireAuthorization, setError } from './actions';
 
 export const clearErrorAction = createAsyncThunk(
   'clearError',
@@ -26,6 +26,19 @@ export const fetchFilmsnAction = createAsyncThunk(
     try {
       const {data} = await api.get<Films>(APIRoute.Films);
       store.dispatch(loadFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+export const fetchPromoFilmAction = createAsyncThunk(
+  'data/fetchPromoFilm',
+  async () => {
+
+
+    try {
+      const {data} = await api.get<Film>(APIRoute.Promo);
+      store.dispatch(loadPromoFilm(data));
     } catch (error) {
       errorHandle(error);
     }
