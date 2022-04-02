@@ -1,22 +1,29 @@
 
-import { Link} from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 import { AppRoute} from '../../consts';
 import NotFound from '../404-screen/404-screen';
-import { useFilm } from '../../hooks/use-film';
 import Tabs from '../tabs/tabs';
 import LikeFilms from '../like-films/like-films';
 import Header from '../header/header';
 import Footer from '../footer/footer';
+import { useEffect } from 'react';
+import { fetchCurrentFilmAction } from '../../store/api-actions';
+import { store } from '../../store';
+import { useAppSelector } from '../../hooks';
+import { Film } from '../../types/film';
 
 function MovieDetails(): JSX.Element {
-  const film = useFilm();
+  const params = useParams();
+  useEffect(() => {
+    store.dispatch(fetchCurrentFilmAction(params.id as string));
 
-
+  }, [params.id]);
+  const film = useAppSelector((state) => state.currentFilm);
   if(typeof film === 'undefined'){
     return <NotFound />;
   }
 
-  const {name,posterImage, genre, released, id, backgroundImage,backgroundColor } = film;
+  const {name,posterImage, genre, released, id, backgroundImage,backgroundColor } = film as Film;
   return (
     <>
       <section className="film-card film-card--full"  style={{
@@ -82,7 +89,7 @@ function MovieDetails(): JSX.Element {
         </div>
       </section>
       <div className="page-content">
-        <LikeFilms film={film} />
+        <LikeFilms film={film as Film} />
 
         <Footer />
       </div>

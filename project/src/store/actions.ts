@@ -10,3 +10,5 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 export const addFilms = createAction('data/addFilms');
 export const resetMaxFilms = createAction('film/resetMaxFilms');
 export const loadPromoFilm = createAction<Film>('data/loadPromoFilm');
+export const loadCurrentFilm = createAction<Film>('data/loadCurrentFilm');
+export const load

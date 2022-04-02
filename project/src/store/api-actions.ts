@@ -6,7 +6,7 @@ import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
 import { Film, Films } from '../types/film';
 import { UserData } from '../types/user-data';
-import { loadFilms, loadPromoFilm, requireAuthorization, setError } from './actions';
+import { loadCurrentFilm, loadFilms, loadPromoFilm, requireAuthorization, setError } from './actions';
 
 export const clearErrorAction = createAsyncThunk(
   'clearError',
@@ -26,6 +26,20 @@ export const fetchFilmsnAction = createAsyncThunk(
     try {
       const {data} = await api.get<Films>(APIRoute.Films);
       store.dispatch(loadFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchCurrentFilmAction = createAsyncThunk(
+  'data/fetchCurrentFilm',
+  async (filmId: string) => {
+
+
+    try {
+      const {data} = await api.get<Film>((`${APIRoute.Films}/${filmId}`));
+      store.dispatch(loadCurrentFilm(data));
     } catch (error) {
       errorHandle(error);
     }

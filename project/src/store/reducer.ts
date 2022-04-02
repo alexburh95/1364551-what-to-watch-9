@@ -1,5 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { addFilms, changeGenre, loadFilms, loadPromoFilm, requireAuthorization, resetMaxFilms, setError } from './actions';
+import { addFilms, changeGenre, loadCurrentFilm, loadFilms, loadPromoFilm, requireAuthorization, resetMaxFilms, setError } from './actions';
 
 
 import { AuthorizationStatus, DEFAULT_GENRE, FilmsOnPage } from '../consts';
@@ -14,6 +14,7 @@ isDataLoaded: boolean,
 authorizationStatus: AuthorizationStatus,
 maxFilms: number,
 promoFilm: Film | object,
+currentFilm: Film | object,
 }
 const initialState: InitalState = {
   genre: DEFAULT_GENRE,
@@ -23,6 +24,7 @@ const initialState: InitalState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   maxFilms : +FilmsOnPage.Initial,
   promoFilm: {},
+  currentFilm: {},
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -53,6 +55,10 @@ const reducer = createReducer(initialState, (builder) => {
 
     .addCase(loadPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
+    })
+
+    .addCase(loadCurrentFilm, (state, action) => {
+      state.currentFilm = action.payload;
     });
 
 });

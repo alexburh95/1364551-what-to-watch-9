@@ -24,6 +24,7 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Promo = '/promo',
+
 }
 export enum HTTP_CODE {
   BAD_REQUEST = 400,
