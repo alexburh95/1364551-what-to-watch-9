@@ -7,7 +7,9 @@ import { AuthData } from '../types/auth-data';
 import { Film, Films } from '../types/film';
 import { Reviews, UserReview } from '../types/reviews';
 import { UserData } from '../types/user-data';
-import { loadCurrentFilm, loadFilms, loadMoreLikesFilms, loadPromoFilm, loadReviews, redirectToRoute, requireAuthorization, sendReview, setError } from './actions';
+import { redirectToRoute } from './actions';
+import { loadCurrentFilm, loadReviews, loadFilms, loadMoreLikesFilms, loadPromoFilm, sendReview } from './film-data/film-data';
+import { requireAuthorization, setError } from './user-process/user-process';
 
 export const clearErrorAction = createAsyncThunk(
   'clearError',
@@ -126,7 +128,9 @@ export const fetchReviewAction = createAsyncThunk(
       store.dispatch(redirectToRoute(`films/${filmId}`));
     } catch (error) {
       errorHandle(error);
+      store.dispatch(redirectToRoute(AppRoute.Error));
       store.dispatch(sendReview(false));
+
     }
   },
 );

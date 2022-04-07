@@ -8,8 +8,8 @@ import { logoutAction } from '../../store/api-actions';
 function NoAuthUser(): JSX.Element {
   const dispatch = useAppDispatch();
 
-
-  const currentAuthStatus = useAppSelector((state)=> state.authorizationStatus);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const currentAuthStatus = authorizationStatus;
   if(currentAuthStatus !== AuthorizationStatus.Auth ){
 
     return(

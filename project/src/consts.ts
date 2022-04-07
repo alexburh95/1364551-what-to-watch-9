@@ -62,3 +62,10 @@ export enum FilmsOnPage {
 export  function formatDate (value: string) {
   return dayjs(value).format('MMMM DD, YYYY');
 }
+
+export enum NameSpace {
+  film = 'FILM',
+  data = 'DATA',
+  user = 'USER',
+}
+

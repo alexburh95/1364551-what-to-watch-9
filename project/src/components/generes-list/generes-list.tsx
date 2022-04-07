@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { DEFAULT_GENRE } from '../../consts';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeGenre } from '../../store/actions';
+import { changeGenre } from '../../store/film-process/film-process';
+
 import { FilmCards } from '../../types/film';
 import { createGeneres } from './genres-list-functions';
 type GenresProps ={
@@ -12,7 +13,7 @@ function GeneresList(props: GenresProps): JSX.Element {
   const {films} = props;
   const allGeneres = createGeneres(films);
   const dispatch = useAppDispatch();
-  const currentGenre = useAppSelector((state)=> state.genre);
+  const {currentGenre} = useAppSelector(({FILM}) => FILM);
   return (
     <ul className="catalog__genres-list">
 
@@ -32,19 +33,19 @@ function GeneresList(props: GenresProps): JSX.Element {
           {'All genres'}
         </Link>
       </li>
-      {allGeneres.map((genre) => (
+      {allGeneres.map((el) => (
         <li
-          key={genre}
+          key={el}
           onClick={() => {
-            dispatch(changeGenre(genre));
+            dispatch(changeGenre(el));
 
           }}
           className={`catalog__genres-item  ${
-            genre === currentGenre ? 'catalog__genres-item--active' : ''
+            el === currentGenre ? 'catalog__genres-item--active' : ''
           }`}
         >
           <Link className="catalog__genres-link" to={''}>
-            {genre}
+            {el}
           </Link>
         </li>
 

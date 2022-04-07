@@ -10,7 +10,7 @@ type FilmProps ={
 function FilmList(props: FilmProps): JSX.Element {
   const [activeFilmId, setActiveFilmId] = useState(undefined as number| undefined);
   const {films} =props;
-  const currentGenre = useAppSelector((state)=> state.genre);
+  const {currentGenre} = useAppSelector(({FILM}) => FILM);
   const currentFilms = chooseGenre(currentGenre,films);
   return(
     <div className="catalog__films-list">

@@ -2,7 +2,8 @@ import { Film } from '../../types/film';
 import { Link } from 'react-router-dom';
 import VideoPlayer from '../video-player/video-player';
 import { useAppDispatch } from '../../hooks';
-import { resetMaxFilms } from '../../store/actions';
+import { resetMaxFilms } from '../../store/film-process/film-process';
+
 
 type FilmProps = {
   film: Film,

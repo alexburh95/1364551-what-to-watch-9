@@ -5,7 +5,7 @@ import { useAppSelector } from '../../hooks';
 import NotFound from '../404-screen/404-screen';
 
 function Player(): JSX.Element {
-  const films = useAppSelector((state) => state.films);
+  const {films} =  useAppSelector(({DATA}) => DATA);
   const{id:qsId}= useParams();
   if(typeof qsId=== 'undefined'){
     return <NotFound />;
