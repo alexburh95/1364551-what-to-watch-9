@@ -10,6 +10,7 @@ type MyListButtonProps =  {
 function MyListButton({filmId, isFavorite, isPromo}: MyListButtonProps) {
   const status: number = isFavorite ? 0 : 1;
 
+
   return (
     <button onClick={() => {
       store.dispatch(setFilmFavoriteAction({filmId, status, isPromo}));

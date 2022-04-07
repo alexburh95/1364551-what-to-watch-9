@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/film';
 import FilmList from '../film-list/film-list';
@@ -44,12 +45,14 @@ function MainScreen():JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+
+                <Link to={`/player/${id}`}className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+
+                </Link>
                 <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo/>
               </div>
             </div>
