@@ -4,7 +4,7 @@ import FilmList from '../film-list/film-list';
 
 function MyList(): JSX.Element {
 
-  const films = useAppSelector((state) => state.films);
+  const {films} = useAppSelector(({DATA}) => DATA);
   return (
     <div className="user-page">
       <header className="page-header user-page__head">

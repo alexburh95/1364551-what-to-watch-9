@@ -1,34 +1,42 @@
 
 import { Link, useParams} from 'react-router-dom';
 import { AppRoute, AuthorizationStatus} from '../../consts';
-import NotFound from '../404-screen/404-screen';
 import Tabs from '../tabs/tabs';
 import LikeFilms from '../like-films/like-films';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import { useEffect } from 'react';
 import { fetchCurrentFilmAction, fetchMoreLikeFilmsAction, fetchReviewsAction } from '../../store/api-actions';
-import { store } from '../../store';
 import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/film';
+import { useDispatch } from 'react-redux';
+import { redirectToRoute } from '../../store/actions';
+import { store } from '../../store';
+
 
 function MovieDetails(): JSX.Element {
-  const params = useParams();
-  useEffect(() => {
-    store.dispatch(fetchCurrentFilmAction(params.id as string));
-    store.dispatch(fetchMoreLikeFilmsAction(params.id as string));
-    store.dispatch(fetchReviewsAction(params.id as string));
-  }, [params.id]);
-  const film = useAppSelector((state) => state.currentFilm);
-  const films = useAppSelector((state) => state.likeFilms);
 
+  const {id}= useParams();
 
-  const currentAuthStatus = useAppSelector((state)=> state.authorizationStatus);
-  if(film === Object){
-    return <NotFound />;
+  if(typeof id ==='undefined'){
+    store.dispatch(redirectToRoute(AppRoute.Error));
   }
 
-  const {name,posterImage, genre, released, backgroundImage,backgroundColor, id } = film as Film;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCurrentFilmAction(id as string));
+    dispatch(fetchMoreLikeFilmsAction(id as string));
+    dispatch(fetchReviewsAction(id as string));
+  }, [dispatch, id]);
+
+  const {currentFilm,likeFilms} = useAppSelector(({DATA}) => DATA);
+  const film = currentFilm;
+  const films = likeFilms;
+
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const currentAuthStatus = authorizationStatus;
+
+  const {name,posterImage, genre, released, backgroundImage,backgroundColor } = film as Film;
   return (
     <>
       <section className="film-card film-card--full"  style={{

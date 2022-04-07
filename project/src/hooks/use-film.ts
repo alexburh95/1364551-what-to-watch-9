@@ -4,7 +4,9 @@ import { DECIMAL } from '../consts';
 
 
 export const useFilm =()=>{
-  const films = useAppSelector((state) => state.films);
+
+  const {films}= useAppSelector(({DATA}) => DATA);
+
   const{id:qsId}= useParams();
   if(typeof qsId=== 'undefined'){
     return undefined;

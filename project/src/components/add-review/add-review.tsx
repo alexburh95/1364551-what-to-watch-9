@@ -1,23 +1,28 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { sendReview } from '../../store/actions';
 import { fetchReviewAction } from '../../store/api-actions';
+import { sendReview } from '../../store/film-data/film-data';
 import { Film } from '../../types/film';
+import NotFound from '../404-screen/404-screen';
 import Logo from '../logo/logo';
 import NoAuthUser from '../no-auth-header/no-auth-header';
 
 function AddReview(): JSX.Element {
-  const isReviewSending = useAppSelector((state) => state.sendingReview);
-  const film = useAppSelector((state) => state.currentFilm);
+  const { sendingReview, currentFilm} = useAppSelector(({DATA}) => DATA);
+
+  const film = currentFilm;
   const dispatch = useAppDispatch();
   const startRating = 0;
   const commentValue =' ';
-  const param = useParams();
   const[rating,setRaiting] = useState(startRating);
   const [comment, setComment] =useState(commentValue);
 
+  const {id}= useParams();
 
+  if(typeof id ==='undefined'){
+    return <NotFound />;
+  }
   const raitingStarsChangeHandler :React.ChangeEventHandler<HTMLInputElement> = (evt) => {
     const valueTargetElement = Number(evt.target.value);
     setRaiting(valueTargetElement);
@@ -39,12 +44,13 @@ function AddReview(): JSX.Element {
       fetchReviewAction({
         rating: rating,
         comment: comment,
-        filmId: param.id as string,
+        filmId: id as string,
       }),
     );
   };
 
-  const {name,posterImage, backgroundImage, backgroundColor, id} = film as Film;
+
+  const {name,posterImage, backgroundImage, backgroundColor} = film as Film;
   return (
 
     <section className="film-card film-card--full"  style={{
@@ -120,9 +126,9 @@ function AddReview(): JSX.Element {
           </div>
 
           <div className="add-review__text">
-            <textarea disabled={isReviewSending} onChange={textAreaChangeHandler} className="add-review__textarea" value={comment} name="review-text" id="review-text" placeholder="Review text"></textarea>
+            <textarea disabled={ sendingReview} onChange={textAreaChangeHandler} className="add-review__textarea" value={comment} name="review-text" id="review-text" placeholder="Review text"></textarea>
             <div className="add-review__submit">
-              <button disabled={comment.length < 50 || comment.length > 400 || !rating || isReviewSending}  className="add-review__btn" type="submit">Post
+              <button disabled={comment.length < 50 || comment.length > 400 || !rating || sendingReview}  className="add-review__btn" type="submit">Post
               </button>
             </div>
 

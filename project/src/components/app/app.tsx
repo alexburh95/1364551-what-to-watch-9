@@ -2,7 +2,7 @@ import MainScreen from '../main-screen/main-screen';
 import SignIn from '../sign-in-screnn/sign-in-screen';
 import {Route, Routes} from 'react-router-dom';
 import MyList from '../my-list-screen/my-list-screen';
-import {AppRoute} from '../../consts';
+import {AppRoute, AuthorizationStatus} from '../../consts';
 import MovieDetails from '../movie-page-details-screen/movie-page-details-screen';
 import AddReview from '../add-review/add-review';
 import NotFound from '../404-screen/404-screen';
@@ -10,14 +10,13 @@ import PrivateRoute from '../private-route/private-route';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../loading-screen/loading-screen';
 import Player from '../player-screen/player-screen';
-import { isCheckedAuth } from '../../film';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  if (isCheckedAuth(authorizationStatus) || !isDataLoaded) {
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const {isDataLoaded} = useAppSelector(({DATA}) => DATA);
+  if (authorizationStatus === AuthorizationStatus.Unknown || !isDataLoaded) {
     return (
       <LoadingScreen />
     );

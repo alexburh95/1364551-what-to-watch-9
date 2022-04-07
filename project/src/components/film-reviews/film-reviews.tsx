@@ -4,8 +4,8 @@ import { useAppSelector } from '../../hooks';
 import NotFound from '../404-screen/404-screen';
 
 function FilmReviews(): JSX.Element {
+  const {reviews} = useAppSelector(({DATA}) => DATA);
 
-  const reviews = useAppSelector((state) => state.reviews);
   if(typeof reviews === 'undefined'){
     return <NotFound />;
   }

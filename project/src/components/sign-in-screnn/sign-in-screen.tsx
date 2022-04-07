@@ -12,7 +12,8 @@ function SignIn(): JSX.Element {
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const currentAuthStatus = useAppSelector((state)=> state.authorizationStatus);
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const currentAuthStatus = authorizationStatus;
   if(currentAuthStatus === AuthorizationStatus.Auth ){
     return(
       <Navigate to={AppRoute.Main}/>

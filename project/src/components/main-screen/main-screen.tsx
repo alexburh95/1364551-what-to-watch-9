@@ -12,13 +12,13 @@ import ShowMore from '../show-more/show-more';
 
 function MainScreen():JSX.Element {
 
+  const {films,promoFilm} = useAppSelector(({DATA}) => DATA);
+  const{currentGenre, maxFilms} = useAppSelector(({FILM}) => FILM);
 
-  const currentGenre = useAppSelector((state)=> state.genre);
-  const films = useAppSelector((state) => state.films);
-  const promoFilm = useAppSelector((state) => state.promoFilm);
+
   const currentFilms = chooseGenre(currentGenre,films);
-  const maxFilmsOnPage = useAppSelector((state) => state.maxFilms);
-  const {name, genre, backgroundImage, released, posterImage} = promoFilm as Film;
+  const maxFilmsOnPage = maxFilms;
+  const {name, genre,  backgroundImage, released, posterImage} = promoFilm as Film;
   return (
     <React.Fragment>
       <section className="film-card">
