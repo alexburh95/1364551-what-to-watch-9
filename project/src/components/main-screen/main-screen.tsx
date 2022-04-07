@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { AuthorizationStatus } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import { Film } from '../../types/film';
 import FilmList from '../film-list/film-list';
@@ -17,7 +18,8 @@ function MainScreen():JSX.Element {
   const {films,promoFilm} = useAppSelector(({DATA}) => DATA);
   const{currentGenre, maxFilms} = useAppSelector(({FILM}) => FILM);
 
-
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const currentAuthStatus = authorizationStatus;
   const currentFilms = chooseGenre(currentGenre,films);
   const maxFilmsOnPage = maxFilms;
   const {name, genre,  backgroundImage, released, posterImage, isFavorite, id} = promoFilm as Film;
@@ -53,7 +55,11 @@ function MainScreen():JSX.Element {
                   <span>Play</span>
 
                 </Link>
-                <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo/>
+
+                {currentAuthStatus=== AuthorizationStatus.Auth ?
+                  <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo={false}/>
+                  : null}
+
               </div>
             </div>
           </div>

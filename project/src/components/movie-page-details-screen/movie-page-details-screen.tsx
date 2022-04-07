@@ -73,7 +73,9 @@ function MovieDetails(): JSX.Element {
                   <span>Play</span>
 
                 </Link>
-                <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo={false}/>
+                {currentAuthStatus=== AuthorizationStatus.Auth ?
+                  <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo={false}/>
+                  : null}
 
                 {currentAuthStatus=== AuthorizationStatus.Auth ?
                   <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
