@@ -25,3 +25,9 @@ isFavorite: boolean
 export type FilmCards = Film[];
 
 export type Films = Film[];
+
+export type FilmStatus = {
+  filmId: string;
+  status: number;
+  isPromo: boolean;
+};

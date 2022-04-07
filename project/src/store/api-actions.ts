@@ -4,7 +4,7 @@ import { APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../
 import { errorHandle } from '../services/error-handle';
 import { dropToken, saveToken } from '../services/token';
 import { AuthData } from '../types/auth-data';
-import { Film, Films } from '../types/film';
+import { Film, Films, FilmStatus } from '../types/film';
 import { Reviews, UserReview } from '../types/reviews';
 import { UserData } from '../types/user-data';
 import { redirectToRoute } from './actions';
@@ -69,6 +69,23 @@ export const fetchReviewsAction = createAsyncThunk(
       store.dispatch(loadReviews(data));
     } catch (error) {
       errorHandle(error);
+    }
+  },
+);
+
+export const setFilmFavoriteAction = createAsyncThunk(
+  'data/setFilmFavorite',
+  async ({filmId, status, isPromo}: FilmStatus) => {
+    try {
+      await api.post<number>(`${APIRoute.Favorite}/${filmId}/${status}`);
+      if (!isPromo) {
+        store.dispatch(fetchCurrentFilmAction(filmId));
+      } else {
+        store.dispatch(fetchPromoFilmAction());
+      }
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(redirectToRoute(AppRoute.Error));
     }
   },
 );
