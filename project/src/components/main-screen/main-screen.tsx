@@ -7,6 +7,7 @@ import Footer from '../footer/footer';
 import GeneresList from '../generes-list/generes-list';
 import { chooseGenre } from '../generes-list/genres-list-functions';
 import Header from '../header/header';
+import MyListButton from '../my-list-button/my-list-button';
 import ShowMore from '../show-more/show-more';
 
 
@@ -18,7 +19,7 @@ function MainScreen():JSX.Element {
 
   const currentFilms = chooseGenre(currentGenre,films);
   const maxFilmsOnPage = maxFilms;
-  const {name, genre,  backgroundImage, released, posterImage} = promoFilm as Film;
+  const {name, genre,  backgroundImage, released, posterImage, isFavorite, id} = promoFilm as Film;
   return (
     <React.Fragment>
       <section className="film-card">
@@ -49,12 +50,7 @@ function MainScreen():JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo/>
               </div>
             </div>
           </div>

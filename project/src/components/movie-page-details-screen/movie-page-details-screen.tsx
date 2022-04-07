@@ -12,6 +12,7 @@ import { Film } from '../../types/film';
 import { useDispatch } from 'react-redux';
 import { redirectToRoute } from '../../store/actions';
 import { store } from '../../store';
+import MyListButton from '../my-list-button/my-list-button';
 
 
 function MovieDetails(): JSX.Element {
@@ -36,7 +37,7 @@ function MovieDetails(): JSX.Element {
   const {authorizationStatus} = useAppSelector(({USER}) => USER);
   const currentAuthStatus = authorizationStatus;
 
-  const {name,posterImage, genre, released, backgroundImage,backgroundColor } = film as Film;
+  const {name,posterImage, genre, released, backgroundImage,backgroundColor, isFavorite } = film as Film;
   return (
     <>
       <section className="film-card film-card--full"  style={{
@@ -72,12 +73,7 @@ function MovieDetails(): JSX.Element {
                   <span>Play</span>
 
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo={false}/>
 
                 {currentAuthStatus=== AuthorizationStatus.Auth ?
                   <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
