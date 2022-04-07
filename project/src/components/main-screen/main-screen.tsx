@@ -1,8 +1,10 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthorizationStatus } from '../../consts';
 import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { fetchPromoFilmAction } from '../../store/api-actions';
 import { Film } from '../../types/film';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
@@ -23,6 +25,9 @@ function MainScreen():JSX.Element {
   const currentFilms = chooseGenre(currentGenre,films);
   const maxFilmsOnPage = maxFilms;
   const {name, genre,  backgroundImage, released, posterImage, isFavorite, id} = promoFilm as Film;
+  useEffect(() => {
+    store.dispatch(fetchPromoFilmAction());
+  }, [isFavorite]);
   return (
     <React.Fragment>
       <section className="film-card">
@@ -57,7 +62,7 @@ function MainScreen():JSX.Element {
                 </Link>
 
                 {currentAuthStatus=== AuthorizationStatus.Auth ?
-                  <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo={false}/>
+                  <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo/>
                   : null}
 
               </div>
@@ -88,3 +93,5 @@ function MainScreen():JSX.Element {
 }
 
 export default MainScreen;
+
+
