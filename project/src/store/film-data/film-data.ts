@@ -37,6 +37,9 @@ export const filmData = createSlice({
     sendReview: (state, action) => {
       state.sendingReview = action.payload;
     },
+    LoadFavoriteFilms: (state, action) => {
+      state.favoriteFilms = action.payload;
+    },
   },
 });
 
@@ -46,5 +49,6 @@ export const {
   loadCurrentFilm,
   loadReviews,
   loadPromoFilm,
+  LoadFavoriteFilms,
   sendReview,
 } = filmData.actions;

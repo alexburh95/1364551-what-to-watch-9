@@ -1,12 +1,17 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthorizationStatus } from '../../consts';
 import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { fetchPromoFilmAction } from '../../store/api-actions';
 import { Film } from '../../types/film';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
 import GeneresList from '../generes-list/generes-list';
 import { chooseGenre } from '../generes-list/genres-list-functions';
 import Header from '../header/header';
+import MyListButton from '../my-list-button/my-list-button';
 import ShowMore from '../show-more/show-more';
 
 
@@ -15,10 +20,14 @@ function MainScreen():JSX.Element {
   const {films,promoFilm} = useAppSelector(({DATA}) => DATA);
   const{currentGenre, maxFilms} = useAppSelector(({FILM}) => FILM);
 
-
+  const {authorizationStatus} = useAppSelector(({USER}) => USER);
+  const currentAuthStatus = authorizationStatus;
   const currentFilms = chooseGenre(currentGenre,films);
   const maxFilmsOnPage = maxFilms;
-  const {name, genre,  backgroundImage, released, posterImage} = promoFilm as Film;
+  const {name, genre,  backgroundImage, released, posterImage, isFavorite, id} = promoFilm as Film;
+  useEffect(() => {
+    store.dispatch(fetchPromoFilmAction());
+  }, [isFavorite]);
   return (
     <React.Fragment>
       <section className="film-card">
@@ -43,18 +52,19 @@ function MainScreen():JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+
+                <Link to={`/player/${id}`}className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+
+                </Link>
+
+                {currentAuthStatus=== AuthorizationStatus.Auth ?
+                  <MyListButton filmId={`${id}`} isFavorite={isFavorite} isPromo/>
+                  : null}
+
               </div>
             </div>
           </div>
@@ -83,3 +93,5 @@ function MainScreen():JSX.Element {
 }
 
 export default MainScreen;
+
+
