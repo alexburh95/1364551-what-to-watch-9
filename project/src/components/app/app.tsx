@@ -2,7 +2,7 @@ import MainScreen from '../main-screen/main-screen';
 import SignIn from '../sign-in-screnn/sign-in-screen';
 import {Route, Routes} from 'react-router-dom';
 import MyList from '../my-list-screen/my-list-screen';
-import {AppRoute, AuthorizationStatus} from '../../consts';
+import {AppRoute, AppRoutePlayer, AuthorizationStatus} from '../../consts';
 import MovieDetails from '../movie-page-details-screen/movie-page-details-screen';
 import AddReview from '../add-review/add-review';
 import NotFound from '../404-screen/404-screen';
@@ -46,7 +46,7 @@ function App(): JSX.Element {
 
         />
         <Route
-          path={AppRoute.Player}
+          path={AppRoutePlayer.Player()}
           element={<Player />}
         />
         <Route

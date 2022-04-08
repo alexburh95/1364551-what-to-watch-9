@@ -1,6 +1,6 @@
 
 import { Link, useParams} from 'react-router-dom';
-import { AppRoute, AuthorizationStatus} from '../../consts';
+import { AppRoute, AppRoutePlayer, AuthorizationStatus} from '../../consts';
 import Tabs from '../tabs/tabs';
 import LikeFilms from '../like-films/like-films';
 import Header from '../header/header';
@@ -66,7 +66,7 @@ function MovieDetails(): JSX.Element {
 
               <div className="film-card__buttons">
 
-                <Link to={`/player/${id}`}className="btn btn--play film-card__button" type="button">
+                <Link to={AppRoutePlayer.Player(parseInt(id as string, 10))}className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>

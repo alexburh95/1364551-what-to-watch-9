@@ -1,4 +1,4 @@
-import { store } from '../../store';
+import { useDispatch } from 'react-redux';
 import { setFilmFavoriteAction } from '../../store/api-actions';
 
 type MyListButtonProps =  {
@@ -9,11 +9,11 @@ type MyListButtonProps =  {
 
 function MyListButton({filmId, isFavorite, isPromo}: MyListButtonProps) {
   const status: number = isFavorite ? 0 : 1;
-
+  const dispatch = useDispatch();
 
   return (
     <button onClick={() => {
-      store.dispatch(setFilmFavoriteAction({filmId, status, isPromo}));
+      dispatch(setFilmFavoriteAction({filmId, status, isPromo}));
     }} className="btn btn--list film-card__button" type="button"
     >
       {
