@@ -11,6 +11,12 @@ export enum AppRoute  {
   Error = '*',
 
 }
+
+export const AppRoutePlayer = {
+  Player: (id: number | ':id' = ':id') => `/player/${id}`,
+};
+
+
 export enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
