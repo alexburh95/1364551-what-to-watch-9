@@ -155,7 +155,6 @@ export const fetchReviewAction = createAsyncThunk(
       store.dispatch(redirectToRoute(`films/${filmId}`));
     } catch (error) {
       errorHandle(error);
-      store.dispatch(redirectToRoute(AppRoute.Error));
       store.dispatch(sendReview(false));
 
     }

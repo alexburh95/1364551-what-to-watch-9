@@ -5,6 +5,7 @@ import { AppRoutePlayer, AuthorizationStatus } from '../../consts';
 import { useAppSelector } from '../../hooks';
 import { store } from '../../store';
 import { fetchPromoFilmAction } from '../../store/api-actions';
+import { resetMaxFilms } from '../../store/film-process/film-process';
 import { Film } from '../../types/film';
 import FilmList from '../film-list/film-list';
 import Footer from '../footer/footer';
@@ -28,6 +29,10 @@ function MainScreen():JSX.Element {
   useEffect(() => {
     store.dispatch(fetchPromoFilmAction());
   }, [isFavorite]);
+
+  useEffect(() => {
+    store.dispatch(resetMaxFilms());
+  }, []);
   return (
     <React.Fragment>
       <section className="film-card">

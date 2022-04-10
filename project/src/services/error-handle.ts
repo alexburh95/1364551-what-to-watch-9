@@ -1,5 +1,5 @@
 import request from 'axios';
-import { HTTP_CODE } from '../consts';
+import { HttpCode } from '../consts';
 import {store} from '../store';
 
 
@@ -22,13 +22,13 @@ export const errorHandle = (error: ErrorType): void => {
 
   if (response) {
     switch (response.status) {
-      case HTTP_CODE.BAD_REQUEST:
+      case HttpCode.BadRequest:
         handleError(response.data.error);
         break;
-      case HTTP_CODE.UNAUTHORIZED:
+      case HttpCode.Unauthorized:
         handleError(response.data.error);
         break;
-      case HTTP_CODE.NOT_FOUND:
+      case HttpCode.NotFound:
         handleError(response.data.error);
         break;
     }

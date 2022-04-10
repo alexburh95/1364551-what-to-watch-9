@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 
 
-export enum AppRoute  {
+export const enum AppRoute  {
   Main = '/',
   SignIn = '/login',
   MyList = '/myList',
@@ -17,7 +17,7 @@ export const AppRoutePlayer = {
 };
 
 
-export enum AuthorizationStatus {
+export const enum AuthorizationStatus {
   Auth = 'AUTH',
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
@@ -29,8 +29,8 @@ export const DECIMAL = 10;
 export const DEFAULT_GENRE = 'All genres';
 
 
-export enum APIRoute {
- Films = '/films',
+export const enum APIRoute {
+  Films = '/films',
   Login = '/login',
   Logout = '/logout',
   Promo = '/promo',
@@ -39,10 +39,10 @@ export enum APIRoute {
 
 
 }
-export enum HTTP_CODE {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+export const enum HttpCode {
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
 
 export const TIMEOUT_SHOW_ERROR = 2000;
@@ -61,8 +61,8 @@ export const TABS=[{
 
 
 export enum FilmsOnPage {
-  MaxPerStep = '8',
-  Initial = '8'
+  MaxPerStep = 8,
+  Initial = 8
 }
 
 
@@ -70,9 +70,9 @@ export  function formatDate (value: string) {
   return dayjs(value).format('MMMM DD, YYYY');
 }
 
-export enum NameSpace {
-  film = 'FILM',
-  data = 'DATA',
-  user = 'USER',
+export const enum NameSpace {
+  Film = 'FILM',
+  Data = 'DATA',
+  User = 'USER',
 }
 

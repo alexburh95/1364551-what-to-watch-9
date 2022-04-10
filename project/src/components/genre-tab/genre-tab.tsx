@@ -1,12 +1,12 @@
 
 type genre = {
-  prop: string;
+  genre: string;
 }
-function GenereTab(prop: genre): JSX.Element {
+function GenereTab(genre: genre): JSX.Element {
   return (
 
     <li className="catalog__genres-item catalog__genres-item">
-      <a href="/" className="catalog__genres-link">{prop}</a>
+      <a href="/" className="catalog__genres-link">{genre}</a>
     </li>
 
   );

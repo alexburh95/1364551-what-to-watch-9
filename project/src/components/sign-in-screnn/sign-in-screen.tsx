@@ -37,7 +37,6 @@ function SignIn(): JSX.Element {
   };
 
   const passwordValidity = ()=>{
-    const REGULAR = /(?=.*[0-9])(?=.*[a-z])/g;
     if (loginRef.current !== null && passwordRef.current !== null){
       const shield =passwordRef.current;
       const password = passwordRef.current.value;
@@ -48,7 +47,7 @@ function SignIn(): JSX.Element {
           'Необходимо минимум 2 символа',
         );
 
-      } else if(!REGULAR.test(password)){
+      } else if(!((/[0-9]/g).test(password) && (/[a-zA-Za]/g).test(password))){
         shield.setCustomValidity(
           'Ошибка заполнения. Необходима минимум 1 латинская буква и 1 цифра',
         );
@@ -77,7 +76,7 @@ function SignIn(): JSX.Element {
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input className="sign-in__input"
-                type="text"
+                type="email"
                 placeholder="Email address"
                 name="name"
                 id="name"
@@ -89,7 +88,7 @@ function SignIn(): JSX.Element {
               <input onChange= {() => {
                 passwordValidity();
               } } className="sign-in__input"
-              type="text"
+              type="password"
               placeholder="Password"
               name="password"
               id="password"
